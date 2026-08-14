@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste CXone</title>
+</head>
+
+<body>
+
+    <h2>Teste CXone</h2>
+
+    <label>CPF:</label>
+    <input type="text" id="cpf" placeholder="Digite o CPF">
+
+    <button onclick="iniciarChat()">
+        Iniciar Chat
+    </button>
+
+
+    <script>
+
+        // ============================================
+        // CARREGA O CXone
+        // ============================================
+
+        (function(n,u){
+
+            window.CXoneDfo = n;
+
+            window[n] = window[n] || function(){
+
+                (window[n].q = window[n].q || []).push(arguments);
+
+            };
+
+            window[n].u = u;
+
+            e = document.createElement("script");
+
+            e.type = "module";
+
+            e.src = u + "?" + Math.round(Date.now()/1e3/3600);
+
+            document.head.appendChild(e);
+
+        })(
+            'cxone',
+            'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js'
+        );
+
+
+        // ============================================
+        // INICIALIZA CXone
+        // ============================================
+
+        cxone('init', '2082');
+
+
+        // ============================================
+        // INICIAR CHAT
+        // ============================================
+
+        function iniciarChat() {
+
+            var cpfCliente =
+                document.getElementById("cpf").value;
+
+
+            console.log("CPF:", cpfCliente);
+
+
+            // Envia CPF para o Custom Field
+            cxone(
+                'chat',
+                'setContactCustomField',
+                'cpf',
+                cpfCliente
+            );
+
+
+            // Inicializa o Chat
+            cxone(
+                'chat',
+                'init',
+                2082,
+                'chat_8a486555-27cf-4666-adf5-3de6195582dd'
+        
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
