@@ -12,7 +12,7 @@
 
     <h1>Teste NICE CXone</h1>
 
-    <p>Digite um CPF para iniciar o atendimento:</p>
+    <p>Digite seu CPF para iniciar o atendimento:</p>
 
     <input
         type="text"
@@ -68,19 +68,15 @@
 
 
         // =====================================================
-        // INICIALIZA O WEB CHAT
+        // NÃO INICIALIZAMOS O CHAT AQUI
+        //
+        // O chat será inicializado somente depois
+        // que o CPF for enviado.
         // =====================================================
-
-        cxone(
-            'chat',
-            'init',
-            5731,
-            'chat_8a486555-27cf-4666-adf5-3de6195582dd'
-        );
 
 
         // =====================================================
-        // INICIAR ATENDIMENTO
+        // INICIAR CHAT
         // =====================================================
 
         function iniciarChat() {
@@ -90,25 +86,34 @@
             var status = document.getElementById('status');
 
 
-            // Remove pontos, traços e espaços
+            // =================================================
+            // LIMPA FORMATAÇÃO DO CPF
+            // =================================================
+
             cpf = cpf.replace(/[^0-9]/g, '');
 
 
             // =================================================
-            // VALIDAÇÃO
+            // VALIDA CPF
             // =================================================
 
             if (cpf.length !== 11) {
 
                 status.innerHTML =
-                    'Digite um CPF válido com 11 números.';
+                    'Digite um CPF com 11 números.';
 
                 return;
             }
 
 
+            console.log(
+                'CPF informado:',
+                cpf
+            );
+
+
             // =================================================
-            // ENVIA CPF PARA O CXone
+            // ENVIA CPF PARA O CUSTOM FIELD
             // =================================================
 
             cxone(
@@ -126,11 +131,23 @@
 
 
             status.innerHTML =
-                'CPF enviado. Iniciando atendimento...';
+                'CPF enviado. Iniciando Web Chat...';
 
 
             // =================================================
-            // ABRE O WEB CHAT
+            // AGORA INICIALIZA O WEB CHAT
+            // =================================================
+
+            cxone(
+                'chat',
+                'init',
+                5731,
+                'chat_8a486555-27cf-4666-adf5-3de6195582dd'
+            );
+
+
+            // =================================================
+            // ABRE O CHAT
             // =================================================
 
             cxone(
