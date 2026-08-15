@@ -6,99 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Teste NICE CXone</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 40px 20px;
-            background: #f5f5f5;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            margin-top: 0;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        input {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            border: 0;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        #status {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            background: #f0f0f0;
-        }
-    </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <h1>Teste NICE CXone</h1>
 
-        <h1>Teste CXone</h1>
+    <p>Teste do Web Chat</p>
 
-        <p>
-            Informe um CPF de teste para enviar ao CXone.
-        </p>
-
-        <label for="cpf">
-            CPF
-        </label>
-
-        <input
-            type="text"
-            id="cpf"
-            placeholder="Digite o CPF"
-            maxlength="11"
-        >
-
-        <button onclick="enviarCPF()">
-            Enviar CPF para o CXone
-        </button>
-
-        <div id="status">
-            Aguardando CPF...
-        </div>
-
-    </div>
-
-
-    <!-- =========================================================
-         NICE CXone
-         ========================================================= -->
+    <button onclick="abrirChat()">
+        Abrir Web Chat
+    </button>
 
     <script>
+
+        // ==========================================
+        // CARREGAMENTO DO CXone
+        // ==========================================
 
         (function(n,u){
 
@@ -112,7 +36,7 @@
 
             window[n].u = u;
 
-            e = document.createElement("script");
+            var e = document.createElement("script");
 
             e.type = "module";
 
@@ -126,62 +50,32 @@
         );
 
 
-        // =========================================================
-        // INICIALIZAÇÃO DO CXone
-        // =========================================================
+        // ==========================================
+        // INICIALIZA CXone
+        // ==========================================
 
-        cxone('init', '5731');
-
-        cxone('guide', 'init');
+        cxone('init', '2082');
 
 
-        // =========================================================
-        // FUNÇÃO PARA ENVIAR CPF
-        // =========================================================
+        // ==========================================
+        // INICIALIZA O CHAT
+        // ==========================================
 
-        function enviarCPF() {
-
-            var cpf = document.getElementById('cpf').value;
-
-            var status = document.getElementById('status');
-
-
-            // Remove espaços e caracteres não numéricos
-            cpf = cpf.replace(/[^0-9]/g, '');
+        cxone(
+            'chat',
+            'init',
+            2082,
+            'chat_2dfda40d-735f-4d78-9139-1b582825f234'
+        );
 
 
-            // Validação simples
-            if (cpf === '') {
+        // ==========================================
+        // ABRIR CHAT
+        // ==========================================
 
-                status.innerHTML = 'Digite um CPF para continuar.';
+        function abrirChat() {
 
-                return;
-
-            }
-
-
-            // =====================================================
-            // ENVIA CPF PARA O CONTACT CUSTOM FIELD DO CXone
-            // =====================================================
-
-            cxone(
-                'chat',
-                'setContactCustomField',
-                'cpf',
-                cpf
-            );
-
-
-            console.log('CPF enviado para o CXone:', cpf);
-
-
-            status.innerHTML =
-                'CPF enviado para o CXone: ' + cpf;
-
-
-            // =====================================================
-            // ABRE O CHAT
-            // =====================================================
+            console.log("Abrindo CXone Chat...");
 
             cxone(
                 'chat',
