@@ -12,18 +12,27 @@
 
     <h1>Teste NICE CXone</h1>
 
-    <p>Web Chat da NICE</p>
+    <p>Digite um CPF para iniciar o atendimento:</p>
 
-    <button onclick="abrirChat()">
-        Abrir Chat
+    <input
+        type="text"
+        id="cpf"
+        placeholder="Digite o CPF"
+        maxlength="11"
+    >
+
+    <button onclick="iniciarChat()">
+        Iniciar Chat
     </button>
+
+    <p id="status"></p>
 
 
     <script>
 
-        // ==========================================
+        // =====================================================
         // CARREGA O CXone
-        // ==========================================
+        // =====================================================
 
         (function(n,u){
 
@@ -51,16 +60,16 @@
         );
 
 
-        // ==========================================
-        // BRAND
-        // ==========================================
+        // =====================================================
+        // INICIALIZA CXone
+        // =====================================================
 
         cxone('init', '5731');
 
 
-        // ==========================================
+        // =====================================================
         // INICIALIZA O WEB CHAT
-        // ==========================================
+        // =====================================================
 
         cxone(
             'chat',
@@ -70,13 +79,59 @@
         );
 
 
-        // ==========================================
-        // FUNÇÃO PARA ABRIR O CHAT
-        // ==========================================
+        // =====================================================
+        // INICIAR ATENDIMENTO
+        // =====================================================
 
-        function abrirChat() {
+        function iniciarChat() {
 
-            console.log("Abrindo Web Chat CXone...");
+            var cpf = document.getElementById('cpf').value;
+
+            var status = document.getElementById('status');
+
+
+            // Remove pontos, traços e espaços
+            cpf = cpf.replace(/[^0-9]/g, '');
+
+
+            // =================================================
+            // VALIDAÇÃO
+            // =================================================
+
+            if (cpf.length !== 11) {
+
+                status.innerHTML =
+                    'Digite um CPF válido com 11 números.';
+
+                return;
+            }
+
+
+            // =================================================
+            // ENVIA CPF PARA O CXone
+            // =================================================
+
+            cxone(
+                'chat',
+                'setContactCustomField',
+                'cpf',
+                cpf
+            );
+
+
+            console.log(
+                'CPF enviado para o CXone:',
+                cpf
+            );
+
+
+            status.innerHTML =
+                'CPF enviado. Iniciando atendimento...';
+
+
+            // =================================================
+            // ABRE O WEB CHAT
+            // =================================================
 
             cxone(
                 'chat',
