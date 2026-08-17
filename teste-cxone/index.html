@@ -2,161 +2,720 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Teste NICE CXone</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .opcoes {
+            margin-top: 20px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .documento-btn {
+            background: #eeeeee;
+        }
+
+        .documento-btn:hover {
+            background: #dddddd;
+        }
+
+        .principal {
+            background: #333333;
+            color: white;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            margin-top: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        #areaDocumento {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .erro {
+            background: #ffe5e5;
+            color: #b00000;
+        }
+
+        .sucesso {
+            background: #e5ffe9;
+            color: #006b1b;
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <h1>Teste NICE CXone</h1>
+<div class="container">
 
-    <p>Digite o CPF:</p>
+    <h1>Atendimento</h1>
 
-    <input
-        type="text"
-        id="cpf"
-        placeholder="Digite o CPF"
-        maxlength="11"
+    <p>
+        Para iniciar seu atendimento, selecione o documento:
+    </p>
+
+
+    <!-- =====================================================
+         ESCOLHA DO DOCUMENTO
+         ===================================================== -->
+
+    <div
+        id="opcoesDocumento"
+        class="opcoes"
     >
 
-    <button onclick="iniciarChat()">
-        Iniciar Chat
-    </button>
+        <button
+            class="documento-btn"
+            onclick="selecionarDocumento('CPF')"
+        >
+            1 - CPF
+        </button>
 
-    <p id="status"></p>
+
+        <button
+            class="documento-btn"
+            onclick="selecionarDocumento('CNPJ')"
+        >
+            2 - CNPJ
+        </button>
+
+    </div>
 
 
-    <script>
+    <!-- =====================================================
+         ÁREA DO DOCUMENTO
+         ===================================================== -->
 
-        // =====================================================
-        // CARREGA CXone
-        // =====================================================
+    <div id="areaDocumento">
 
-        (function(n,u){
+        <p id="textoDocumento"></p>
 
-            window.CXoneDfo = n;
 
-            window[n] = window[n] || function(){
+        <input
+            type="text"
+            id="documento"
+            placeholder=""
+        >
 
-                (window[n].q = window[n].q || []).push(arguments);
 
-            };
+        <button
+            class="principal"
+            onclick="validarEIniciarChat()"
+        >
+            Continuar
+        </button>
 
-            window[n].u = u;
+    </div>
 
-            var e = document.createElement("script");
 
-            e.type = "module";
+    <!-- =====================================================
+         STATUS
+         ===================================================== -->
 
-            e.src = u + "?" + Math.round(Date.now() / 1e3 / 3600);
+    <div id="status"></div>
 
-            document.head.appendChild(e);
+</div>
 
-        })(
-            'cxone',
-            'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js'
+
+<script>
+
+
+// =========================================================
+// CONFIGURAÇÕES
+// =========================================================
+
+var tipoDocumento = "";
+
+
+// =========================================================
+// CARREGA CXone
+// =========================================================
+
+(function(n,u){
+
+    window.CXoneDfo = n;
+
+    window[n] = window[n] || function(){
+
+        (window[n].q = window[n].q || []).push(arguments);
+
+    };
+
+    window[n].u = u;
+
+    var e = document.createElement("script");
+
+    e.type = "module";
+
+    e.src =
+        u + "?" +
+        Math.round(Date.now() / 1e3 / 3600);
+
+    document.head.appendChild(e);
+
+})(
+    'cxone',
+    'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js'
+);
+
+
+// =========================================================
+// INICIALIZA CXone
+// =========================================================
+
+cxone('init', '5731');
+
+
+// =========================================================
+// SELECIONA CPF OU CNPJ
+// =========================================================
+
+function selecionarDocumento(tipo) {
+
+    tipoDocumento = tipo;
+
+
+    document.getElementById(
+        "opcoesDocumento"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "areaDocumento"
+    ).style.display = "block";
+
+
+    var input =
+        document.getElementById("documento");
+
+
+    if (tipo === "CPF") {
+
+        document.getElementById(
+            "textoDocumento"
+        ).innerHTML =
+            "Digite seu CPF:";
+
+        input.placeholder =
+            "Ex.: 123.456.789-00";
+
+        input.maxLength = 14;
+
+    }
+
+
+    if (tipo === "CNPJ") {
+
+        document.getElementById(
+            "textoDocumento"
+        ).innerHTML =
+            "Digite seu CNPJ:";
+
+        input.placeholder =
+            "Ex.: 12.345.678/0001-99";
+
+        input.maxLength = 18;
+
+    }
+
+
+    input.value = "";
+
+    input.focus();
+
+}
+
+
+// =========================================================
+// REMOVE CARACTERES
+// =========================================================
+
+function somenteNumeros(valor) {
+
+    return valor.replace(
+        /[^0-9]/g,
+        ""
+    );
+
+}
+
+
+// =========================================================
+// VALIDA CPF
+// =========================================================
+
+function validarCPF(cpf) {
+
+    cpf = somenteNumeros(cpf);
+
+
+    if (cpf.length !== 11) {
+
+        return false;
+
+    }
+
+
+    // Rejeita números repetidos
+    // 00000000000
+    // 11111111111
+    // etc.
+
+    if (
+        cpf === "00000000000" ||
+        cpf === "11111111111" ||
+        cpf === "22222222222" ||
+        cpf === "33333333333" ||
+        cpf === "44444444444" ||
+        cpf === "55555555555" ||
+        cpf === "66666666666" ||
+        cpf === "77777777777" ||
+        cpf === "88888888888" ||
+        cpf === "99999999999"
+    ) {
+
+        return false;
+
+    }
+
+
+    var soma = 0;
+
+    var resto;
+
+
+    // Primeiro dígito
+
+    for (
+        var i = 1;
+        i <= 9;
+        i++
+    ) {
+
+        soma +=
+            parseInt(
+                cpf.substring(i - 1, i)
+            ) * (11 - i);
+
+    }
+
+
+    resto = (soma * 10) % 11;
+
+
+    if (resto === 10) {
+
+        resto = 0;
+
+    }
+
+
+    if (
+        resto !==
+        parseInt(cpf.substring(9, 10))
+    ) {
+
+        return false;
+
+    }
+
+
+    // Segundo dígito
+
+    soma = 0;
+
+
+    for (
+        var i = 1;
+        i <= 10;
+        i++
+    ) {
+
+        soma +=
+            parseInt(
+                cpf.substring(i - 1, i)
+            ) * (12 - i);
+
+    }
+
+
+    resto = (soma * 10) % 11;
+
+
+    if (resto === 10) {
+
+        resto = 0;
+
+    }
+
+
+    if (
+        resto !==
+        parseInt(cpf.substring(10, 11))
+    ) {
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+// =========================================================
+// VALIDA CNPJ
+// =========================================================
+
+function validarCNPJ(cnpj) {
+
+    cnpj = somenteNumeros(cnpj);
+
+
+    if (cnpj.length !== 14) {
+
+        return false;
+
+    }
+
+
+    // Rejeita números repetidos
+
+    if (
+        cnpj === "00000000000000" ||
+        cnpj === "11111111111111" ||
+        cnpj === "22222222222222" ||
+        cnpj === "33333333333333" ||
+        cnpj === "44444444444444" ||
+        cnpj === "55555555555555" ||
+        cnpj === "66666666666666" ||
+        cnpj === "77777777777777" ||
+        cnpj === "88888888888888" ||
+        cnpj === "99999999999999"
+    ) {
+
+        return false;
+
+    }
+
+
+    var tamanho = 12;
+
+    var numeros =
+        cnpj.substring(
+            0,
+            tamanho
+        );
+
+    var digitos =
+        cnpj.substring(
+            tamanho
         );
 
 
-        // =====================================================
-        // INICIALIZA CXone
-        // =====================================================
+    var soma = 0;
 
-        cxone('init', '5731');
+    var pos = tamanho - 7;
 
 
-        // =====================================================
-        // INICIAR ATENDIMENTO
-        // =====================================================
+    for (
+        var i = tamanho;
+        i >= 1;
+        i--
+    ) {
 
-        function iniciarChat() {
+        soma +=
+            parseInt(
+                numeros.charAt(
+                    tamanho - i
+                )
+            ) * pos;
 
-            var cpf = document.getElementById('cpf').value;
+        pos--;
 
-            var status = document.getElementById('status');
+        if (pos < 2) {
 
-
-            // Remove pontos, traços e espaços
-            cpf = cpf.replace(/[^0-9]/g, '');
-
-
-            // Validação
-            if (cpf.length !== 11) {
-
-                status.innerHTML =
-                    'Digite um CPF com 11 números.';
-
-                return;
-
-            }
-
-
-            console.log('CPF informado:', cpf);
-
-
-            // =================================================
-            // 1 - INICIALIZA O WEB CHAT
-            // =================================================
-
-            cxone(
-                'chat',
-                'init',
-                5731,
-                'chat_8a486555-27cf-4666-adf5-3de6195582dd'
-            );
-
-
-            console.log('Web Chat inicializado');
-
-
-            // =================================================
-            // 2 - ENVIA O CPF PARA O CUSTOM FIELD
-            // =================================================
-
-           // cxone(
-           //     'chat',
-           //     'setContactCustomField',
-           //     'cpf',
-            //    cpf
-          //  );
-cxone(
-    'chat',
-    'setContactCustomField',
-    'cpf',
-    '12345678900'
-);
-
-cxone(
-    'chat',
-    'setCustomerCustomField',
-    'cpf_customer',
-    '12345678900'
-);
-
-            console.log(
-                'CPF enviado para Custom Field:',
-                cpf
-            );
-
-
-            status.innerHTML =
-                'CPF enviado. Abrindo atendimento...';
-
-
-            // =================================================
-            // 3 - ABRE O CHAT
-            // =================================================
-
-            cxone(
-                'chat',
-                'openChatWindow'
-            );
+            pos = 9;
 
         }
 
-    </script>
+    }
+
+
+    var resultado =
+        soma % 11 < 2
+            ? 0
+            : 11 - (soma % 11);
+
+
+    if (
+        resultado !==
+        parseInt(
+            digitos.charAt(0)
+        )
+    ) {
+
+        return false;
+
+    }
+
+
+    tamanho = tamanho + 1;
+
+    numeros =
+        cnpj.substring(
+            0,
+            tamanho
+        );
+
+    soma = 0;
+
+    pos = tamanho - 7;
+
+
+    for (
+        var i = tamanho;
+        i >= 1;
+        i--
+    ) {
+
+        soma +=
+            parseInt(
+                numeros.charAt(
+                    tamanho - i
+                )
+            ) * pos;
+
+        pos--;
+
+        if (pos < 2) {
+
+            pos = 9;
+
+        }
+
+    }
+
+
+    resultado =
+        soma % 11 < 2
+            ? 0
+            : 11 - (soma % 11);
+
+
+    if (
+        resultado !==
+        parseInt(
+            digitos.charAt(1)
+        )
+    ) {
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+// =========================================================
+// ENVIA PARA CXone E INICIA CHAT
+// =========================================================
+
+function validarEIniciarChat() {
+
+    var documento =
+        document.getElementById(
+            "documento"
+        ).value;
+
+
+    var status =
+        document.getElementById(
+            "status"
+        );
+
+
+    // Remove máscara
+
+    documento =
+        somenteNumeros(
+            documento
+        );
+
+
+    // =====================================================
+    // VALIDA CPF
+    // =====================================================
+
+    if (
+        tipoDocumento === "CPF" &&
+        !validarCPF(documento)
+    ) {
+
+        status.className = "erro";
+
+        status.innerHTML =
+            "CPF inválido. Verifique o número e tente novamente.";
+
+        return;
+
+    }
+
+
+    // =====================================================
+    // VALIDA CNPJ
+    // =====================================================
+
+    if (
+        tipoDocumento === "CNPJ" &&
+        !validarCNPJ(documento)
+    ) {
+
+        status.className = "erro";
+
+        status.innerHTML =
+            "CNPJ inválido. Verifique o número e tente novamente.";
+
+        return;
+
+    }
+
+
+    console.log(
+        "Documento válido:",
+        documento
+    );
+
+
+    console.log(
+        "Tipo:",
+        tipoDocumento
+    );
+
+
+    // =====================================================
+    // INICIALIZA WEB CHAT
+    // =====================================================
+
+    cxone(
+        'chat',
+        'init',
+        5731,
+        'chat_8a486555-27cf-4666-adf5-3de6195582dd'
+    );
+
+
+    // =====================================================
+    // ENVIA DOCUMENTO
+    // =====================================================
+
+    cxone(
+        'chat',
+        'setContactCustomField',
+        'documento',
+        documento
+    );
+
+
+    // =====================================================
+    // ENVIA TIPO DO DOCUMENTO
+    // =====================================================
+
+    cxone(
+        'chat',
+        'setContactCustomField',
+        'tipoDocumento',
+        tipoDocumento
+    );
+
+
+    console.log(
+        "Documento enviado para CXone:",
+        documento
+    );
+
+
+    console.log(
+        "Tipo enviado para CXone:",
+        tipoDocumento
+    );
+
+
+    status.className = "sucesso";
+
+    status.innerHTML =
+        "Documento validado. Iniciando atendimento...";
+
+
+    // =====================================================
+    // ABRE O WEB CHAT
+    // =====================================================
+
+    cxone(
+        'chat',
+        'openChatWindow'
+    );
+
+}
+
+</script>
 
 </body>
 
