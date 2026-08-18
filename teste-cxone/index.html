@@ -702,8 +702,23 @@ function validarEIniciarChat() {
 
     status.innerHTML =
         "Documento validado. Iniciando atendimento...";
+// =====================================================
+// CUSTOMIZAÇÃO
+// =====================================================
+cxone(
+    'chat',
+    'setCustomCss',
 
+    `
+    [data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
+        background: #000000 !important;
+        color: #ffffff !important;
+    }
 
+    [data-selector="CONTENT"] {
+        background: #ff0000 !important;
+    }
+);
     // =====================================================
     // ABRE O WEB CHAT
     // =====================================================
