@@ -710,15 +710,26 @@ cxone(
     'chat',
     'setCustomCss',
 
-    `
-    [data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
-        background: #000000 !important;
-        color: #ffffff !important;
-    }
 
-    [data-selector="CONTENT"] {
-        background: #ff0000 !important;
-    }
+    
+    `
+[data-selector="CONTENT"] {
+    background: #ffffff !important;
+}
+
+[data-selector="HEADER"] {
+    background: #0077b5 !important;
+}
+
+[data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
+    background: #0077b5 !important;
+    color: #ffffff !important;
+}
+
+[data-selector="AGENT_MESSAGE_BUBBLE"] {
+    background: #f1f1f1 !important;
+    color: #222222 !important;
+}
     `
 );
     // =====================================================
