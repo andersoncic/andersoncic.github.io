@@ -12,6 +12,11 @@
 
     <title>Teste NICE CXone</title>
 
+
+    <!-- =====================================================
+         ESTILO DA PÁGINA
+         ===================================================== -->
+
     <style>
 
         body {
@@ -20,6 +25,7 @@
             margin: 0;
             padding: 40px 20px;
         }
+
 
         .container {
             max-width: 450px;
@@ -30,13 +36,16 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.10);
         }
 
+
         h1 {
             margin-top: 0;
         }
 
+
         .opcoes {
             margin-top: 20px;
         }
+
 
         button {
             width: 100%;
@@ -48,18 +57,22 @@
             font-size: 16px;
         }
 
+
         .documento-btn {
             background: #eeeeee;
         }
+
 
         .documento-btn:hover {
             background: #dddddd;
         }
 
+
         .principal {
             background: #333333;
             color: white;
         }
+
 
         input {
             width: 100%;
@@ -71,10 +84,12 @@
             font-size: 16px;
         }
 
+
         #areaDocumento {
             display: none;
             margin-top: 20px;
         }
+
 
         #status {
             margin-top: 20px;
@@ -82,10 +97,12 @@
             border-radius: 6px;
         }
 
+
         .erro {
             background: #ffe5e5;
             color: #b00000;
         }
+
 
         .sucesso {
             background: #e5ffe9;
@@ -98,6 +115,7 @@
 
 
 <body>
+
 
 <div class="container">
 
@@ -170,6 +188,7 @@
 </div>
 
 
+
 <script>
 
 
@@ -220,6 +239,182 @@ cxone('init', '5731');
 
 
 // =========================================================
+// IDIOMA
+// =========================================================
+
+cxone(
+    'chat',
+    'setLocale',
+    'pt-BR'
+);
+
+
+// =========================================================
+// TRADUÇÕES
+// =========================================================
+
+cxone(
+    'chat',
+    'setTranslations',
+    {
+
+        // Campo de mensagem
+        replyBoxPlaceholder:
+            'Digite sua mensagem...',
+
+        // Botão enviar
+        sendMessageButton:
+            'Enviar mensagem',
+
+        // Tentar novamente
+        retry:
+            'Tentar novamente',
+
+        // Cancelar
+        cancel:
+            'Cancelar',
+
+        // Concluído
+        done:
+            'Concluído',
+
+        // Novo atendimento
+        startNewChat:
+            'Iniciar novo atendimento',
+
+        // Aguardando atendente
+        waitingForAgent:
+            'Aguardando atendente...',
+
+        // Aguardando fila
+        waitingInQueue:
+            'Aguardando atendimento...',
+
+        // Reconectando
+        statusReconnecting:
+            'Tentando reconectar...',
+
+        // Erro
+        unexpectedError:
+            'Ocorreu um erro inesperado.',
+
+        // Campo obrigatório
+        validationMandatory:
+            'Este campo é obrigatório.',
+
+        // Seleção
+        pleaseSelect:
+            'Selecione...',
+
+        // Rodapé
+        poweredBy:
+            'Desenvolvido por'
+
+    }
+);
+
+
+// =========================================================
+// CUSTOM CSS
+// =========================================================
+
+cxone(
+    'chat',
+    'setCustomCss',
+
+    `
+
+    /* =====================================================
+       ÁREA PRINCIPAL DO CHAT
+       ===================================================== */
+
+    [data-selector="CONTENT"] {
+
+        background: #ffffff !important;
+
+    }
+
+
+    /* =====================================================
+       CABEÇALHO
+       ===================================================== */
+
+    [data-selector="HEADER"] {
+
+        background: #0077b5 !important;
+
+        color: #ffffff !important;
+
+    }
+
+
+    /* =====================================================
+       MENSAGEM DO CLIENTE
+       ===================================================== */
+
+    [data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
+
+        background: #0077b5 !important;
+
+        color: #ffffff !important;
+
+        border-radius: 12px !important;
+
+    }
+
+
+    /* =====================================================
+       MENSAGEM DO AGENTE
+       ===================================================== */
+
+    [data-selector="AGENT_MESSAGE_BUBBLE"] {
+
+        background: #f1f1f1 !important;
+
+        color: #222222 !important;
+
+        border-radius: 12px !important;
+
+    }
+
+
+    /* =====================================================
+       ÁREA DE RESPOSTA
+       ===================================================== */
+
+    [data-selector="REPLY_BOX"] {
+
+        border-radius: 12px !important;
+
+    }
+
+
+    /* =====================================================
+       CAMPO DE TEXTO
+       ===================================================== */
+
+    [data-selector="TEXTAREA"] {
+
+        border-radius: 10px !important;
+
+    }
+
+
+    /* =====================================================
+       BOTÃO ENVIAR
+       ===================================================== */
+
+    [data-selector="SEND_BUTTON"] {
+
+        border-radius: 50% !important;
+
+    }
+
+    `
+);
+
+
+// =========================================================
 // SELECIONA CPF OU CNPJ
 // =========================================================
 
@@ -242,6 +437,10 @@ function selecionarDocumento(tipo) {
         document.getElementById("documento");
 
 
+    // =====================================================
+    // CPF
+    // =====================================================
+
     if (tipo === "CPF") {
 
         document.getElementById(
@@ -256,6 +455,10 @@ function selecionarDocumento(tipo) {
 
     }
 
+
+    // =====================================================
+    // CNPJ
+    // =====================================================
 
     if (tipo === "CNPJ") {
 
@@ -309,10 +512,9 @@ function validarCPF(cpf) {
     }
 
 
-    // Rejeita números repetidos
-    // 00000000000
-    // 11111111111
-    // etc.
+    // =====================================================
+    // REJEITA NÚMEROS REPETIDOS
+    // =====================================================
 
     if (
         cpf === "00000000000" ||
@@ -337,7 +539,9 @@ function validarCPF(cpf) {
     var resto;
 
 
-    // Primeiro dígito
+    // =====================================================
+    // PRIMEIRO DÍGITO
+    // =====================================================
 
     for (
         var i = 1;
@@ -353,7 +557,8 @@ function validarCPF(cpf) {
     }
 
 
-    resto = (soma * 10) % 11;
+    resto =
+        (soma * 10) % 11;
 
 
     if (resto === 10) {
@@ -365,7 +570,9 @@ function validarCPF(cpf) {
 
     if (
         resto !==
-        parseInt(cpf.substring(9, 10))
+        parseInt(
+            cpf.substring(9, 10)
+        )
     ) {
 
         return false;
@@ -373,7 +580,9 @@ function validarCPF(cpf) {
     }
 
 
-    // Segundo dígito
+    // =====================================================
+    // SEGUNDO DÍGITO
+    // =====================================================
 
     soma = 0;
 
@@ -392,7 +601,8 @@ function validarCPF(cpf) {
     }
 
 
-    resto = (soma * 10) % 11;
+    resto =
+        (soma * 10) % 11;
 
 
     if (resto === 10) {
@@ -404,7 +614,9 @@ function validarCPF(cpf) {
 
     if (
         resto !==
-        parseInt(cpf.substring(10, 11))
+        parseInt(
+            cpf.substring(10, 11)
+        )
     ) {
 
         return false;
@@ -433,7 +645,9 @@ function validarCNPJ(cnpj) {
     }
 
 
-    // Rejeita números repetidos
+    // =====================================================
+    // REJEITA NÚMEROS REPETIDOS
+    // =====================================================
 
     if (
         cnpj === "00000000000000" ||
@@ -453,13 +667,19 @@ function validarCNPJ(cnpj) {
     }
 
 
+    // =====================================================
+    // PRIMEIRO DÍGITO
+    // =====================================================
+
     var tamanho = 12;
+
 
     var numeros =
         cnpj.substring(
             0,
             tamanho
         );
+
 
     var digitos =
         cnpj.substring(
@@ -469,7 +689,9 @@ function validarCNPJ(cnpj) {
 
     var soma = 0;
 
-    var pos = tamanho - 7;
+
+    var pos =
+        tamanho - 7;
 
 
     for (
@@ -485,7 +707,9 @@ function validarCNPJ(cnpj) {
                 )
             ) * pos;
 
+
         pos--;
+
 
         if (pos < 2) {
 
@@ -514,7 +738,12 @@ function validarCNPJ(cnpj) {
     }
 
 
+    // =====================================================
+    // SEGUNDO DÍGITO
+    // =====================================================
+
     tamanho = tamanho + 1;
+
 
     numeros =
         cnpj.substring(
@@ -522,9 +751,12 @@ function validarCNPJ(cnpj) {
             tamanho
         );
 
+
     soma = 0;
 
-    pos = tamanho - 7;
+
+    pos =
+        tamanho - 7;
 
 
     for (
@@ -540,7 +772,9 @@ function validarCNPJ(cnpj) {
                 )
             ) * pos;
 
+
         pos--;
+
 
         if (pos < 2) {
 
@@ -575,7 +809,7 @@ function validarCNPJ(cnpj) {
 
 
 // =========================================================
-// ENVIA PARA CXone E INICIA CHAT
+// ENVIA DOCUMENTO E INICIA CHAT
 // =========================================================
 
 function validarEIniciarChat() {
@@ -592,7 +826,9 @@ function validarEIniciarChat() {
         );
 
 
-    // Remove máscara
+    // =====================================================
+    // REMOVE MÁSCARA
+    // =====================================================
 
     documento =
         somenteNumeros(
@@ -638,6 +874,10 @@ function validarEIniciarChat() {
     }
 
 
+    // =====================================================
+    // CONSOLE
+    // =====================================================
+
     console.log(
         "Documento válido:",
         documento
@@ -645,7 +885,7 @@ function validarEIniciarChat() {
 
 
     console.log(
-        "Tipo:",
+        "Tipo do documento:",
         tipoDocumento
     );
 
@@ -686,6 +926,10 @@ function validarEIniciarChat() {
     );
 
 
+    // =====================================================
+    // LOG
+    // =====================================================
+
     console.log(
         "Documento enviado para CXone:",
         documento
@@ -698,84 +942,19 @@ function validarEIniciarChat() {
     );
 
 
+    // =====================================================
+    // STATUS
+    // =====================================================
+
     status.className = "sucesso";
+
 
     status.innerHTML =
         "Documento validado. Iniciando atendimento...";
-// =====================================================
-// CUSTOMIZAÇÃO
-// =====================================================
-
-cxone(
-    'chat',
-    'setCustomCss',
-
-    `
-    /* ================================
-       CHAT
-       ================================ */
-
-    [data-selector="CONTENT"] {
-        background: #ffffff !important;
-    }
 
 
-    /* ================================
-       CABEÇALHO
-       ================================ */
-
-    [data-selector="HEADER"] {
-        background: #0077b5 !important;
-        color: #ffffff !important;
-    }
-
-
-    /* ================================
-       CLIENTE
-       ================================ */
-
-    [data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
-        background: #0077b5 !important;
-        color: #ffffff !important;
-        border-radius: 12px !important;
-    }
-
-
-    /* ================================
-       AGENTE
-       ================================ */
-
-    [data-selector="AGENT_MESSAGE_BUBBLE"] {
-        background: #f1f1f1 !important;
-        color: #222222 !important;
-        border-radius: 12px !important;
-    }
-
-
-    /* ================================
-       CAMPO DE MENSAGEM
-       ================================ */
-
-    [data-selector="REPLY_BOX"] {
-        border-radius: 12px !important;
-    }
-
-    [data-selector="TEXTAREA"] {
-        border-radius: 10px !important;
-    }
-
-
-    /* ================================
-       BOTÃO ENVIAR
-       ================================ */
-
-    [data-selector="SEND_BUTTON"] {
-        border-radius: 50% !important;
-    }
-    `
-);
     // =====================================================
-    // ABRE O WEB CHAT
+    // ABRE WEB CHAT
     // =====================================================
 
     cxone(
@@ -785,7 +964,9 @@ cxone(
 
 }
 
+
 </script>
+
 
 </body>
 
