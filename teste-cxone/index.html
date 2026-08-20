@@ -13,10 +13,6 @@
     <title>Teste NICE CXone</title>
 
 
-    <!-- =====================================================
-         ESTILO DA PÁGINA
-         ===================================================== -->
-
     <style>
 
         body {
@@ -47,66 +43,189 @@
         }
 
 
-        button {
+        /* =====================================================
+           CARDS DE SELEÇÃO
+           ===================================================== */
+
+        .opcao-card {
+
+            display: flex;
+
+            align-items: center;
+
             width: 100%;
-            padding: 14px;
+
+            box-sizing: border-box;
+
+            padding: 15px;
+
             margin-top: 10px;
-            border: none;
-            border-radius: 6px;
+
+            border: 2px solid #dddddd;
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
             cursor: pointer;
+
+            transition: all 0.2s ease;
+
+        }
+
+
+        .opcao-card:hover {
+
+            border-color: #0077b5;
+
+            background: #f5fbff;
+
+        }
+
+
+        .opcao-card.selecionado {
+
+            border-color: #0077b5;
+
+            background: #eef8ff;
+
+        }
+
+
+        .opcao-card input {
+
+            width: auto;
+
+            margin: 0 12px 0 0;
+
+        }
+
+
+        .opcao-card span {
+
             font-size: 16px;
+
+            font-weight: 500;
+
         }
 
 
-        .documento-btn {
-            background: #eeeeee;
-        }
+        /* =====================================================
+           BOTÕES
+           ===================================================== */
 
+        button {
 
-        .documento-btn:hover {
-            background: #dddddd;
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 15px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
         }
 
 
         .principal {
+
             background: #333333;
+
             color: white;
+
         }
 
 
-        input {
+        .principal:hover {
+
+            background: #222222;
+
+        }
+
+
+        /* =====================================================
+           INPUT
+           ===================================================== */
+
+        input[type="text"] {
+
             width: 100%;
+
             box-sizing: border-box;
+
             padding: 13px;
+
             margin-top: 10px;
+
             border: 1px solid #cccccc;
+
             border-radius: 6px;
+
             font-size: 16px;
+
         }
 
+
+        /* =====================================================
+           ÁREA DOCUMENTO
+           ===================================================== */
 
         #areaDocumento {
+
             display: none;
+
             margin-top: 20px;
+
         }
 
 
+        /* =====================================================
+           STATUS
+           ===================================================== */
+
         #status {
+
             margin-top: 20px;
+
             padding: 10px;
+
             border-radius: 6px;
+
         }
 
 
         .erro {
+
             background: #ffe5e5;
+
             color: #b00000;
+
         }
 
 
         .sucesso {
+
             background: #e5ffe9;
+
             color: #006b1b;
+
+        }
+
+
+        /* =====================================================
+           OCULTA SELEÇÃO DE DOCUMENTO INICIALMENTE
+           ===================================================== */
+
+        #opcoesDocumento {
+
+            display: none;
+
         }
 
     </style>
@@ -121,9 +240,116 @@
 
     <h1>Atendimento</h1>
 
-    <p>
-        Para iniciar seu atendimento, selecione o documento:
-    </p>
+
+    <!-- =====================================================
+         SELEÇÃO DO CANAL
+         ===================================================== -->
+
+    <div
+        id="opcoesOrigem"
+        class="opcoes"
+    >
+
+        <p>
+            <strong>
+                Selecione o Canal de Atendimento:
+            </strong>
+        </p>
+
+
+        <!-- APP B2C -->
+
+        <label
+            class="opcao-card selecionado"
+            id="card-appb2c"
+            onclick="selecionarOrigem('appb2c')"
+        >
+
+            <input
+                type="radio"
+                name="origem"
+                value="appb2c"
+                checked
+            >
+
+            <span>
+                App B2C
+            </span>
+
+        </label>
+
+
+        <!-- APP B2B -->
+
+        <label
+            class="opcao-card"
+            id="card-appb2b"
+            onclick="selecionarOrigem('appb2b')"
+        >
+
+            <input
+                type="radio"
+                name="origem"
+                value="appb2b"
+            >
+
+            <span>
+                App B2B
+            </span>
+
+        </label>
+
+
+        <!-- CENTRAL B2C -->
+
+        <label
+            class="opcao-card"
+            id="card-centralb2c"
+            onclick="selecionarOrigem('centralb2c')"
+        >
+
+            <input
+                type="radio"
+                name="origem"
+                value="centralb2c"
+            >
+
+            <span>
+                Central B2C
+            </span>
+
+        </label>
+
+
+        <!-- CENTRAL B2B -->
+
+        <label
+            class="opcao-card"
+            id="card-centralb2b"
+            onclick="selecionarOrigem('centralb2b')"
+        >
+
+            <input
+                type="radio"
+                name="origem"
+                value="centralb2b"
+            >
+
+            <span>
+                Central B2B
+            </span>
+
+        </label>
+
+
+        <button
+            class="principal"
+            onclick="confirmarOrigem()"
+        >
+            Continuar
+        </button>
+
+    </div>
 
 
     <!-- =====================================================
@@ -134,6 +360,13 @@
         id="opcoesDocumento"
         class="opcoes"
     >
+
+        <p>
+            <strong>
+                Selecione o tipo de documento:
+            </strong>
+        </p>
+
 
         <button
             class="documento-btn"
@@ -195,6 +428,10 @@
 // =========================================================
 // CONFIGURAÇÕES
 // =========================================================
+
+// APP B2C selecionado por padrão
+
+var origem = "appb2c";
 
 var tipoDocumento = "";
 
@@ -258,55 +495,42 @@ cxone(
     'setTranslations',
     {
 
-        // Campo de mensagem
         replyBoxPlaceholder:
             'Digite sua mensagem...',
 
-        // Botão enviar
         sendMessageButton:
             'Enviar mensagem',
 
-        // Tentar novamente
         retry:
             'Tentar novamente',
 
-        // Cancelar
         cancel:
             'Cancelar',
 
-        // Concluído
         done:
             'Concluído',
 
-        // Novo atendimento
         startNewChat:
             'Iniciar novo atendimento',
 
-        // Aguardando atendente
         waitingForAgent:
             'Aguardando atendente...',
 
-        // Aguardando fila
         waitingInQueue:
             'Aguardando atendimento...',
 
-        // Reconectando
         statusReconnecting:
             'Tentando reconectar...',
 
-        // Erro
         unexpectedError:
             'Ocorreu um erro inesperado.',
 
-        // Campo obrigatório
         validationMandatory:
             'Este campo é obrigatório.',
 
-        // Seleção
         pleaseSelect:
             'Selecione...',
 
-        // Rodapé
         poweredBy:
             'Desenvolvido por'
 
@@ -315,7 +539,7 @@ cxone(
 
 
 // =========================================================
-// CUSTOM CSS
+// CUSTOM CSS DO WEB CHAT
 // =========================================================
 
 cxone(
@@ -325,7 +549,7 @@ cxone(
     `
 
     /* =====================================================
-       ÁREA PRINCIPAL DO CHAT
+       ÁREA PRINCIPAL
        ===================================================== */
 
     [data-selector="CONTENT"] {
@@ -415,6 +639,109 @@ cxone(
 
 
 // =========================================================
+// SELECIONAR ORIGEM
+// =========================================================
+
+function selecionarOrigem(valor) {
+
+    origem = valor;
+
+
+    console.log(
+        "Origem selecionada:",
+        origem
+    );
+
+
+    // Remove seleção visual de todos
+
+    document
+        .querySelectorAll(".opcao-card")
+        .forEach(function(card) {
+
+            card.classList.remove(
+                "selecionado"
+            );
+
+        });
+
+
+    // Adiciona seleção visual ao escolhido
+
+    var card =
+        document.getElementById(
+            "card-" + valor
+        );
+
+
+    if (card) {
+
+        card.classList.add(
+            "selecionado"
+        );
+
+    }
+
+
+    // Marca o radio correspondente
+
+    var radio =
+        document.querySelector(
+            'input[name="origem"][value="' +
+            valor +
+            '"]'
+        );
+
+
+    if (radio) {
+
+        radio.checked = true;
+
+    }
+
+}
+
+
+// =========================================================
+// CONFIRMA ORIGEM
+// =========================================================
+
+function confirmarOrigem() {
+
+    if (origem === "") {
+
+        alert(
+            "Selecione o Canal de Atendimento."
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "Canal confirmado:",
+        origem
+    );
+
+
+    // Oculta seleção de origem
+
+    document.getElementById(
+        "opcoesOrigem"
+    ).style.display = "none";
+
+
+    // Mostra seleção de documento
+
+    document.getElementById(
+        "opcoesDocumento"
+    ).style.display = "block";
+
+}
+
+
+// =========================================================
 // SELECIONA CPF OU CNPJ
 // =========================================================
 
@@ -434,7 +761,9 @@ function selecionarDocumento(tipo) {
 
 
     var input =
-        document.getElementById("documento");
+        document.getElementById(
+            "documento"
+        );
 
 
     // =====================================================
@@ -512,9 +841,7 @@ function validarCPF(cpf) {
     }
 
 
-    // =====================================================
-    // REJEITA NÚMEROS REPETIDOS
-    // =====================================================
+    // Rejeita números repetidos
 
     if (
         cpf === "00000000000" ||
@@ -539,9 +866,7 @@ function validarCPF(cpf) {
     var resto;
 
 
-    // =====================================================
-    // PRIMEIRO DÍGITO
-    // =====================================================
+    // Primeiro dígito
 
     for (
         var i = 1;
@@ -551,7 +876,10 @@ function validarCPF(cpf) {
 
         soma +=
             parseInt(
-                cpf.substring(i - 1, i)
+                cpf.substring(
+                    i - 1,
+                    i
+                )
             ) * (11 - i);
 
     }
@@ -571,7 +899,10 @@ function validarCPF(cpf) {
     if (
         resto !==
         parseInt(
-            cpf.substring(9, 10)
+            cpf.substring(
+                9,
+                10
+            )
         )
     ) {
 
@@ -580,9 +911,7 @@ function validarCPF(cpf) {
     }
 
 
-    // =====================================================
-    // SEGUNDO DÍGITO
-    // =====================================================
+    // Segundo dígito
 
     soma = 0;
 
@@ -595,7 +924,10 @@ function validarCPF(cpf) {
 
         soma +=
             parseInt(
-                cpf.substring(i - 1, i)
+                cpf.substring(
+                    i - 1,
+                    i
+                )
             ) * (12 - i);
 
     }
@@ -615,7 +947,10 @@ function validarCPF(cpf) {
     if (
         resto !==
         parseInt(
-            cpf.substring(10, 11)
+            cpf.substring(
+                10,
+                11
+            )
         )
     ) {
 
@@ -645,9 +980,7 @@ function validarCNPJ(cnpj) {
     }
 
 
-    // =====================================================
-    // REJEITA NÚMEROS REPETIDOS
-    // =====================================================
+    // Rejeita números repetidos
 
     if (
         cnpj === "00000000000000" ||
@@ -667,10 +1000,6 @@ function validarCNPJ(cnpj) {
     }
 
 
-    // =====================================================
-    // PRIMEIRO DÍGITO
-    // =====================================================
-
     var tamanho = 12;
 
 
@@ -689,10 +1018,11 @@ function validarCNPJ(cnpj) {
 
     var soma = 0;
 
-
     var pos =
         tamanho - 7;
 
+
+    // Primeiro dígito
 
     for (
         var i = tamanho;
@@ -738,11 +1068,10 @@ function validarCNPJ(cnpj) {
     }
 
 
-    // =====================================================
-    // SEGUNDO DÍGITO
-    // =====================================================
+    // Segundo dígito
 
-    tamanho = tamanho + 1;
+    tamanho =
+        tamanho + 1;
 
 
     numeros =
@@ -753,7 +1082,6 @@ function validarCNPJ(cnpj) {
 
 
     soma = 0;
-
 
     pos =
         tamanho - 7;
@@ -879,6 +1207,12 @@ function validarEIniciarChat() {
     // =====================================================
 
     console.log(
+        "Origem:",
+        origem
+    );
+
+
+    console.log(
         "Documento válido:",
         documento
     );
@@ -899,6 +1233,18 @@ function validarEIniciarChat() {
         'init',
         5731,
         'chat_8a486555-27cf-4666-adf5-3de6195582dd'
+    );
+
+
+    // =====================================================
+    // ENVIA ORIGEM
+    // =====================================================
+
+    cxone(
+        'chat',
+        'setContactCustomField',
+        'origem',
+        origem
     );
 
 
@@ -929,6 +1275,12 @@ function validarEIniciarChat() {
     // =====================================================
     // LOG
     // =====================================================
+
+    console.log(
+        "Origem enviada para CXone:",
+        origem
+    );
+
 
     console.log(
         "Documento enviado para CXone:",
