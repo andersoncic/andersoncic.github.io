@@ -1,349 +1,381 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Teste NICE CXone</title>
-
+    <title>Atendimento Alares</title>
 
     <style>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
+        body {
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
         .container {
-            max-width: 450px;
-            margin: auto;
+            width: 100%;
+            max-width: 500px;
             background: #ffffff;
+            border-radius: 16px;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.10);
         }
 
-
-        h1 {
-            margin-top: 0;
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
         }
 
+        .logo h1 {
+            color: #0077b5;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo p {
+            margin-top: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .titulo h2 {
+            font-size: 21px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .titulo p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* =========================
+           CANAIS
+        ========================= */
 
         .opcoes {
-            margin-top: 20px;
-        }
-
-
-        /* =====================================================
-           CARDS DE SELEÇÃO
-           ===================================================== */
-
-        .opcao-card {
-
             display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
+        .opcao {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
             align-items: center;
+            gap: 12px;
+        }
 
-            width: 100%;
+        .opcao:hover {
+            border-color: #0077b5;
+            background: #f7fcff;
+        }
 
-            box-sizing: border-box;
+        .opcao.selecionada {
+            border-color: #0077b5;
+            background: #eef9ff;
+        }
 
-            padding: 15px;
+        .opcao input {
+            width: 18px;
+            height: 18px;
+            accent-color: #0077b5;
+        }
 
-            margin-top: 10px;
+        .opcao-texto strong {
+            display: block;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
 
-            border: 2px solid #dddddd;
+        .opcao-texto span {
+            color: #777;
+            font-size: 13px;
+        }
 
-            border-radius: 8px;
+        /* =========================
+           BOTÕES DOCUMENTO
+        ========================= */
 
+        .documentos {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn-documento {
+            flex: 1;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
             background: #ffffff;
-
             cursor: pointer;
-
-            transition: all 0.2s ease;
-
-        }
-
-
-        .opcao-card:hover {
-
-            border-color: #0077b5;
-
-            background: #f5fbff;
-
-        }
-
-
-        .opcao-card.selecionado {
-
-            border-color: #0077b5;
-
-            background: #eef8ff;
-
-        }
-
-
-        .opcao-card input {
-
-            width: auto;
-
-            margin: 0 12px 0 0;
-
-        }
-
-
-        .opcao-card span {
-
             font-size: 16px;
-
-            font-weight: 500;
-
+            font-weight: bold;
+            color: #333;
+            transition: 0.2s;
         }
 
-
-        /* =====================================================
-           BOTÕES
-           ===================================================== */
-
-        button {
-
-            width: 100%;
-
-            padding: 14px;
-
-            margin-top: 15px;
-
-            border: none;
-
-            border-radius: 6px;
-
-            cursor: pointer;
-
-            font-size: 16px;
-
+        .btn-documento:hover {
+            border-color: #0077b5;
         }
 
-
-        .principal {
-
-            background: #333333;
-
-            color: white;
-
+        .btn-documento.selecionado {
+            background: #0077b5;
+            border-color: #0077b5;
+            color: #ffffff;
         }
 
-
-        .principal:hover {
-
-            background: #222222;
-
-        }
-
-
-        /* =====================================================
+        /* =========================
            INPUT
-           ===================================================== */
+        ========================= */
 
-        input[type="text"] {
+        .campo {
+            margin-top: 20px;
+        }
 
+        .campo label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .campo input {
             width: 100%;
-
-            box-sizing: border-box;
-
-            padding: 13px;
-
-            margin-top: 10px;
-
-            border: 1px solid #cccccc;
-
-            border-radius: 6px;
-
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
             font-size: 16px;
-
+            outline: none;
         }
 
+        .campo input:focus {
+            border-color: #0077b5;
+        }
 
-        /* =====================================================
-           ÁREA DOCUMENTO
-           ===================================================== */
+        /* =========================
+           BOTÃO PRINCIPAL
+        ========================= */
 
-        #areaDocumento {
-
-            display: none;
-
+        .btn {
+            width: 100%;
             margin-top: 20px;
-
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #0077b5;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-
-        /* =====================================================
-           STATUS
-           ===================================================== */
-
-        #status {
-
-            margin-top: 20px;
-
-            padding: 10px;
-
-            border-radius: 6px;
-
+        .btn:hover {
+            background: #005f91;
         }
 
+        .btn:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        /* =========================
+           MENSAGEM DE ERRO
+        ========================= */
 
         .erro {
-
-            background: #ffe5e5;
-
-            color: #b00000;
-
-        }
-
-
-        .sucesso {
-
-            background: #e5ffe9;
-
-            color: #006b1b;
-
-        }
-
-
-        /* =====================================================
-           OCULTA SELEÇÃO DE DOCUMENTO INICIALMENTE
-           ===================================================== */
-
-        #opcoesDocumento {
-
+            color: #d93025;
+            font-size: 13px;
+            margin-top: 8px;
             display: none;
+        }
 
+        /* =========================
+           OCULTAR TELAS
+        ========================= */
+
+        .tela {
+            display: none;
+        }
+
+        .tela.ativa {
+            display: block;
         }
 
     </style>
-
 </head>
-
 
 <body>
 
-
 <div class="container">
 
-    <h1>Atendimento</h1>
+    <!-- =========================
+         CABEÇALHO
+    ========================= -->
+
+    <div class="logo">
+        <h1>Alares</h1>
+        <p>Central de Atendimento</p>
+    </div>
 
 
     <!-- =====================================================
-         SELEÇÃO DO CANAL
-         ===================================================== -->
+         TELA 1 - SELEÇÃO DO CANAL
+    ====================================================== -->
 
-    <div
-        id="opcoesOrigem"
-        class="opcoes"
-    >
+    <div id="telaOrigem" class="tela ativa">
 
-        <p>
-            <strong>
-                Selecione o Canal de Atendimento:
-            </strong>
-        </p>
+        <div class="titulo">
+
+            <h2>Como você deseja ser atendido?</h2>
+
+            <p>
+                Selecione o canal para continuar
+            </p>
+
+        </div>
 
 
-        <!-- APP B2C -->
+        <div class="opcoes">
 
-        <label
-            class="opcao-card selecionado"
-            id="card-appb2c"
-            onclick="selecionarOrigem('appb2c')"
-        >
+            <!-- APP B2C -->
 
-            <input
-                type="radio"
-                name="origem"
-                value="appb2c"
-                checked
+            <div
+                class="opcao selecionada"
+                id="opcao-appb2c"
+                onclick="selecionarOrigem('appb2c')"
             >
 
-            <span>
-                App B2C
-            </span>
+                <input
+                    type="radio"
+                    name="origem"
+                    value="appb2c"
+                    checked
+                >
 
-        </label>
+                <div class="opcao-texto">
+
+                    <strong>App B2C</strong>
+
+                    <span>
+                        Atendimento para clientes residenciais
+                    </span>
+
+                </div>
+
+            </div>
 
 
-        <!-- APP B2B -->
+            <!-- APP B2B -->
 
-        <label
-            class="opcao-card"
-            id="card-appb2b"
-            onclick="selecionarOrigem('appb2b')"
-        >
-
-            <input
-                type="radio"
-                name="origem"
-                value="appb2b"
+            <div
+                class="opcao"
+                id="opcao-appb2b"
+                onclick="selecionarOrigem('appb2b')"
             >
 
-            <span>
-                App B2B
-            </span>
+                <input
+                    type="radio"
+                    name="origem"
+                    value="appb2b"
+                >
 
-        </label>
+                <div class="opcao-texto">
+
+                    <strong>App B2B</strong>
+
+                    <span>
+                        Atendimento para clientes empresariais
+                    </span>
+
+                </div>
+
+            </div>
 
 
-        <!-- CENTRAL B2C -->
+            <!-- CENTRAL B2B -->
 
-        <label
-            class="opcao-card"
-            id="card-centralb2c"
-            onclick="selecionarOrigem('centralb2c')"
-        >
-
-            <input
-                type="radio"
-                name="origem"
-                value="centralb2c"
+            <div
+                class="opcao"
+                id="opcao-centralb2b"
+                onclick="selecionarOrigem('centralb2b')"
             >
 
-            <span>
-                Central B2C
-            </span>
+                <input
+                    type="radio"
+                    name="origem"
+                    value="centralb2b"
+                >
 
-        </label>
+                <div class="opcao-texto">
+
+                    <strong>Central B2B</strong>
+
+                    <span>
+                        Atendimento empresarial
+                    </span>
+
+                </div>
+
+            </div>
 
 
-        <!-- CENTRAL B2B -->
+            <!-- CENTRAL B2C -->
 
-        <label
-            class="opcao-card"
-            id="card-centralb2b"
-            onclick="selecionarOrigem('centralb2b')"
-        >
-
-            <input
-                type="radio"
-                name="origem"
-                value="centralb2b"
+            <div
+                class="opcao"
+                id="opcao-centralb2c"
+                onclick="selecionarOrigem('centralb2c')"
             >
 
-            <span>
-                Central B2B
-            </span>
+                <input
+                    type="radio"
+                    name="origem"
+                    value="centralb2c"
+                >
 
-        </label>
+                <div class="opcao-texto">
+
+                    <strong>Central B2C</strong>
+
+                    <span>
+                        Atendimento residencial
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
         <button
-            class="principal"
+            class="btn"
             onclick="confirmarOrigem()"
         >
             Continuar
@@ -353,58 +385,76 @@
 
 
     <!-- =====================================================
-         ESCOLHA DO DOCUMENTO
-         ===================================================== -->
+         TELA 2 - DOCUMENTO
+    ====================================================== -->
 
-    <div
-        id="opcoesDocumento"
-        class="opcoes"
-    >
+    <div id="telaDocumento" class="tela">
 
-        <p>
-            <strong>
-                Selecione o tipo de documento:
-            </strong>
-        </p>
+        <div class="titulo">
+
+            <h2>Informe seu documento</h2>
+
+            <p>
+                Selecione o tipo de documento
+            </p>
+
+        </div>
+
+
+        <div class="documentos">
+
+            <button
+                class="btn-documento"
+                id="btnCPF"
+                onclick="selecionarDocumento('CPF')"
+            >
+                CPF
+            </button>
+
+
+            <button
+                class="btn-documento"
+                id="btnCNPJ"
+                onclick="selecionarDocumento('CNPJ')"
+            >
+                CNPJ
+            </button>
+
+        </div>
+
+
+        <div
+            class="campo"
+            id="campoDocumento"
+            style="display:none;"
+        >
+
+            <label id="labelDocumento">
+                CPF
+            </label>
+
+            <input
+                type="text"
+                id="documento"
+                placeholder="Digite seu CPF"
+                autocomplete="off"
+            >
+
+            <div
+                id="erroDocumento"
+                class="erro"
+            >
+                Documento inválido.
+            </div>
+
+        </div>
 
 
         <button
-            class="documento-btn"
-            onclick="selecionarDocumento('CPF')"
-        >
-            1 - CPF
-        </button>
-
-
-        <button
-            class="documento-btn"
-            onclick="selecionarDocumento('CNPJ')"
-        >
-            2 - CNPJ
-        </button>
-
-    </div>
-
-
-    <!-- =====================================================
-         ÁREA DO DOCUMENTO
-         ===================================================== -->
-
-    <div id="areaDocumento">
-
-        <p id="textoDocumento"></p>
-
-
-        <input
-            type="text"
-            id="documento"
-            placeholder=""
-        >
-
-
-        <button
-            class="principal"
-            onclick="validarEIniciarChat()"
+            class="btn"
+            id="btnDocumento"
+            onclick="validarEContinuar()"
+            style="display:none;"
         >
             Continuar
         </button>
@@ -413,820 +463,114 @@
 
 
     <!-- =====================================================
-         STATUS
-         ===================================================== -->
+         TELA 3 - ID CONTRATO
+    ====================================================== -->
 
-    <div id="status"></div>
+    <div id="telaContrato" class="tela">
+
+        <div class="titulo">
+
+            <h2>Informe o ID do contrato</h2>
+
+            <p>
+                Digite o número do contrato para continuar
+            </p>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="idcontrato">
+                ID do Contrato
+            </label>
+
+            <input
+                type="text"
+                id="idcontrato"
+                placeholder="Digite o ID do contrato"
+                autocomplete="off"
+            >
+
+            <div
+                id="erroContrato"
+                class="erro"
+            >
+                Informe o ID do contrato.
+            </div>
+
+        </div>
+
+
+        <button
+            class="btn"
+            onclick="validarContratoEIniciarChat()"
+        >
+            Iniciar atendimento
+        </button>
+
+    </div>
 
 </div>
 
 
+<!-- =========================================================
+     CXONE
+========================================================= -->
 
 <script>
 
-
-// =========================================================
-// CONFIGURAÇÕES
-// =========================================================
-
-// APP B2C selecionado por padrão
-
-var origem = "appb2c";
-
-var tipoDocumento = "";
-
-
-// =========================================================
-// CARREGA CXone
-// =========================================================
-
-(function(n,u){
-
-    window.CXoneDfo = n;
-
-    window[n] = window[n] || function(){
-
-        (window[n].q = window[n].q || []).push(arguments);
-
-    };
-
-    window[n].u = u;
-
-    var e = document.createElement("script");
-
-    e.type = "module";
-
-    e.src =
-        u + "?" +
-        Math.round(Date.now() / 1e3 / 3600);
-
-    document.head.appendChild(e);
-
-})(
-    'cxone',
-    'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js'
-);
-
-
-// =========================================================
-// INICIALIZA CXone
-// =========================================================
-
-cxone('init', '5731');
-
-
-// =========================================================
-// IDIOMA
-// =========================================================
-
-cxone(
-    'chat',
-    'setLocale',
-    'pt-BR'
-);
-
-
-// =========================================================
-// TRADUÇÕES
-// =========================================================
-
-cxone(
-    'chat',
-    'setTranslations',
-    {
-
-        replyBoxPlaceholder:
-            'Digite sua mensagem...',
-
-        sendMessageButton:
-            'Enviar mensagem',
-
-        retry:
-            'Tentar novamente',
-
-        cancel:
-            'Cancelar',
-
-        done:
-            'Concluído',
-
-        startNewChat:
-            'Iniciar novo atendimento',
-
-        waitingForAgent:
-            'Aguardando atendente...',
-
-        waitingInQueue:
-            'Aguardando atendimento...',
-
-        statusReconnecting:
-            'Tentando reconectar...',
-
-        unexpectedError:
-            'Ocorreu um erro inesperado.',
-
-        validationMandatory:
-            'Este campo é obrigatório.',
-
-        pleaseSelect:
-            'Selecione...',
-
-        poweredBy:
-            'Desenvolvido por'
-
-    }
-);
-
-
-// =========================================================
-// CUSTOM CSS DO WEB CHAT
-// =========================================================
-
-cxone(
-    'chat',
-    'setCustomCss',
-
-    `
-
     /* =====================================================
-       ÁREA PRINCIPAL
-       ===================================================== */
+       VARIÁVEIS
+    ===================================================== */
 
-    [data-selector="CONTENT"] {
+    var origem = "appb2c";
 
-        background: #ffffff !important;
+    var tipoDocumento = "";
 
-    }
+    var documentoValidado = "";
+
 
 
     /* =====================================================
-       CABEÇALHO
-       ===================================================== */
+       CXONE LOADER
+    ===================================================== */
 
-    [data-selector="HEADER"] {
+    (function(n,u){
 
-        background: #0077b5 !important;
+        window.CXoneDfo = n;
 
-        color: #ffffff !important;
+        window[n] = window[n] || function(){
 
-    }
+            (window[n].q = window[n].q || []).push(arguments);
 
+        };
 
-    /* =====================================================
-       MENSAGEM DO CLIENTE
-       ===================================================== */
+        window[n].u = u;
 
-    [data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
+        var e = document.createElement("script");
 
-        background: #0077b5 !important;
+        e.type = "module";
 
-        color: #ffffff !important;
+        e.src = u + "?" + Math.round(Date.now()/1e3/3600);
 
-        border-radius: 12px !important;
+        document.head.appendChild(e);
 
-    }
-
-
-    /* =====================================================
-       MENSAGEM DO AGENTE
-       ===================================================== */
-
-    [data-selector="AGENT_MESSAGE_BUBBLE"] {
-
-        background: #f1f1f1 !important;
-
-        color: #222222 !important;
-
-        border-radius: 12px !important;
-
-    }
-
-
-    /* =====================================================
-       ÁREA DE RESPOSTA
-       ===================================================== */
-
-    [data-selector="REPLY_BOX"] {
-
-        border-radius: 12px !important;
-
-    }
-
-
-    /* =====================================================
-       CAMPO DE TEXTO
-       ===================================================== */
-
-    [data-selector="TEXTAREA"] {
-
-        border-radius: 10px !important;
-
-    }
-
-
-    /* =====================================================
-       BOTÃO ENVIAR
-       ===================================================== */
-
-    [data-selector="SEND_BUTTON"] {
-
-        border-radius: 50% !important;
-
-    }
-
-    `
-);
-
-
-// =========================================================
-// SELECIONAR ORIGEM
-// =========================================================
-
-function selecionarOrigem(valor) {
-
-    origem = valor;
-
-
-    console.log(
-        "Origem selecionada:",
-        origem
+    })(
+        'cxone',
+        'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js'
     );
 
 
-    // Remove seleção visual de todos
+    /* =====================================================
+       INICIALIZAÇÃO CXONE
+    ===================================================== */
 
-    document
-        .querySelectorAll(".opcao-card")
-        .forEach(function(card) {
-
-            card.classList.remove(
-                "selecionado"
-            );
-
-        });
-
-
-    // Adiciona seleção visual ao escolhido
-
-    var card =
-        document.getElementById(
-            "card-" + valor
-        );
-
-
-    if (card) {
-
-        card.classList.add(
-            "selecionado"
-        );
-
-    }
-
-
-    // Marca o radio correspondente
-
-    var radio =
-        document.querySelector(
-            'input[name="origem"][value="' +
-            valor +
-            '"]'
-        );
-
-
-    if (radio) {
-
-        radio.checked = true;
-
-    }
-
-}
-
-
-// =========================================================
-// CONFIRMA ORIGEM
-// =========================================================
-
-function confirmarOrigem() {
-
-    if (origem === "") {
-
-        alert(
-            "Selecione o Canal de Atendimento."
-        );
-
-        return;
-
-    }
-
-
-    console.log(
-        "Canal confirmado:",
-        origem
+    cxone(
+        'init',
+        '5731'
     );
 
-
-    // Oculta seleção de origem
-
-    document.getElementById(
-        "opcoesOrigem"
-    ).style.display = "none";
-
-
-    // Mostra seleção de documento
-
-    document.getElementById(
-        "opcoesDocumento"
-    ).style.display = "block";
-
-}
-
-
-// =========================================================
-// SELECIONA CPF OU CNPJ
-// =========================================================
-
-function selecionarDocumento(tipo) {
-
-    tipoDocumento = tipo;
-
-
-    document.getElementById(
-        "opcoesDocumento"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "areaDocumento"
-    ).style.display = "block";
-
-
-    var input =
-        document.getElementById(
-            "documento"
-        );
-
-
-    // =====================================================
-    // CPF
-    // =====================================================
-
-    if (tipo === "CPF") {
-
-        document.getElementById(
-            "textoDocumento"
-        ).innerHTML =
-            "Digite seu CPF:";
-
-        input.placeholder =
-            "Ex.: 123.456.789-00";
-
-        input.maxLength = 14;
-
-    }
-
-
-    // =====================================================
-    // CNPJ
-    // =====================================================
-
-    if (tipo === "CNPJ") {
-
-        document.getElementById(
-            "textoDocumento"
-        ).innerHTML =
-            "Digite seu CNPJ:";
-
-        input.placeholder =
-            "Ex.: 12.345.678/0001-99";
-
-        input.maxLength = 18;
-
-    }
-
-
-    input.value = "";
-
-    input.focus();
-
-}
-
-
-// =========================================================
-// REMOVE CARACTERES
-// =========================================================
-
-function somenteNumeros(valor) {
-
-    return valor.replace(
-        /[^0-9]/g,
-        ""
-    );
-
-}
-
-
-// =========================================================
-// VALIDA CPF
-// =========================================================
-
-function validarCPF(cpf) {
-
-    cpf = somenteNumeros(cpf);
-
-
-    if (cpf.length !== 11) {
-
-        return false;
-
-    }
-
-
-    // Rejeita números repetidos
-
-    if (
-        cpf === "00000000000" ||
-        cpf === "11111111111" ||
-        cpf === "22222222222" ||
-        cpf === "33333333333" ||
-        cpf === "44444444444" ||
-        cpf === "55555555555" ||
-        cpf === "66666666666" ||
-        cpf === "77777777777" ||
-        cpf === "88888888888" ||
-        cpf === "99999999999"
-    ) {
-
-        return false;
-
-    }
-
-
-    var soma = 0;
-
-    var resto;
-
-
-    // Primeiro dígito
-
-    for (
-        var i = 1;
-        i <= 9;
-        i++
-    ) {
-
-        soma +=
-            parseInt(
-                cpf.substring(
-                    i - 1,
-                    i
-                )
-            ) * (11 - i);
-
-    }
-
-
-    resto =
-        (soma * 10) % 11;
-
-
-    if (resto === 10) {
-
-        resto = 0;
-
-    }
-
-
-    if (
-        resto !==
-        parseInt(
-            cpf.substring(
-                9,
-                10
-            )
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    // Segundo dígito
-
-    soma = 0;
-
-
-    for (
-        var i = 1;
-        i <= 10;
-        i++
-    ) {
-
-        soma +=
-            parseInt(
-                cpf.substring(
-                    i - 1,
-                    i
-                )
-            ) * (12 - i);
-
-    }
-
-
-    resto =
-        (soma * 10) % 11;
-
-
-    if (resto === 10) {
-
-        resto = 0;
-
-    }
-
-
-    if (
-        resto !==
-        parseInt(
-            cpf.substring(
-                10,
-                11
-            )
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-// =========================================================
-// VALIDA CNPJ
-// =========================================================
-
-function validarCNPJ(cnpj) {
-
-    cnpj = somenteNumeros(cnpj);
-
-
-    if (cnpj.length !== 14) {
-
-        return false;
-
-    }
-
-
-    // Rejeita números repetidos
-
-    if (
-        cnpj === "00000000000000" ||
-        cnpj === "11111111111111" ||
-        cnpj === "22222222222222" ||
-        cnpj === "33333333333333" ||
-        cnpj === "44444444444444" ||
-        cnpj === "55555555555555" ||
-        cnpj === "66666666666666" ||
-        cnpj === "77777777777777" ||
-        cnpj === "88888888888888" ||
-        cnpj === "99999999999999"
-    ) {
-
-        return false;
-
-    }
-
-
-    var tamanho = 12;
-
-
-    var numeros =
-        cnpj.substring(
-            0,
-            tamanho
-        );
-
-
-    var digitos =
-        cnpj.substring(
-            tamanho
-        );
-
-
-    var soma = 0;
-
-    var pos =
-        tamanho - 7;
-
-
-    // Primeiro dígito
-
-    for (
-        var i = tamanho;
-        i >= 1;
-        i--
-    ) {
-
-        soma +=
-            parseInt(
-                numeros.charAt(
-                    tamanho - i
-                )
-            ) * pos;
-
-
-        pos--;
-
-
-        if (pos < 2) {
-
-            pos = 9;
-
-        }
-
-    }
-
-
-    var resultado =
-        soma % 11 < 2
-            ? 0
-            : 11 - (soma % 11);
-
-
-    if (
-        resultado !==
-        parseInt(
-            digitos.charAt(0)
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    // Segundo dígito
-
-    tamanho =
-        tamanho + 1;
-
-
-    numeros =
-        cnpj.substring(
-            0,
-            tamanho
-        );
-
-
-    soma = 0;
-
-    pos =
-        tamanho - 7;
-
-
-    for (
-        var i = tamanho;
-        i >= 1;
-        i--
-    ) {
-
-        soma +=
-            parseInt(
-                numeros.charAt(
-                    tamanho - i
-                )
-            ) * pos;
-
-
-        pos--;
-
-
-        if (pos < 2) {
-
-            pos = 9;
-
-        }
-
-    }
-
-
-    resultado =
-        soma % 11 < 2
-            ? 0
-            : 11 - (soma % 11);
-
-
-    if (
-        resultado !==
-        parseInt(
-            digitos.charAt(1)
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-// =========================================================
-// ENVIA DOCUMENTO E INICIA CHAT
-// =========================================================
-
-function validarEIniciarChat() {
-
-    var documento =
-        document.getElementById(
-            "documento"
-        ).value;
-
-
-    var status =
-        document.getElementById(
-            "status"
-        );
-
-
-    // =====================================================
-    // REMOVE MÁSCARA
-    // =====================================================
-
-    documento =
-        somenteNumeros(
-            documento
-        );
-
-
-    // =====================================================
-    // VALIDA CPF
-    // =====================================================
-
-    if (
-        tipoDocumento === "CPF" &&
-        !validarCPF(documento)
-    ) {
-
-        status.className = "erro";
-
-        status.innerHTML =
-            "CPF inválido. Verifique o número e tente novamente.";
-
-        return;
-
-    }
-
-
-    // =====================================================
-    // VALIDA CNPJ
-    // =====================================================
-
-    if (
-        tipoDocumento === "CNPJ" &&
-        !validarCNPJ(documento)
-    ) {
-
-        status.className = "erro";
-
-        status.innerHTML =
-            "CNPJ inválido. Verifique o número e tente novamente.";
-
-        return;
-
-    }
-
-
-    // =====================================================
-    // CONSOLE
-    // =====================================================
-
-    console.log(
-        "Origem:",
-        origem
-    );
-
-
-    console.log(
-        "Documento válido:",
-        documento
-    );
-
-
-    console.log(
-        "Tipo do documento:",
-        tipoDocumento
-    );
-
-
-    // =====================================================
-    // INICIALIZA WEB CHAT
-    // =====================================================
 
     cxone(
         'chat',
@@ -1236,90 +580,709 @@ function validarEIniciarChat() {
     );
 
 
-    // =====================================================
-    // ENVIA ORIGEM
-    // =====================================================
+    /* =====================================================
+       IDIOMA
+    ===================================================== */
 
     cxone(
         'chat',
-        'setContactCustomField',
-        'origem',
-        origem
+        'setLocale',
+        'pt-BR'
     );
 
-
-    // =====================================================
-    // ENVIA DOCUMENTO
-    // =====================================================
 
     cxone(
         'chat',
-        'setContactCustomField',
-        'documento',
-        documento
+        'setTranslations',
+        {
+
+            replyBoxPlaceholder:
+                'Digite sua mensagem...',
+
+            sendMessageButton:
+                'Enviar mensagem',
+
+            retry:
+                'Tentar novamente',
+
+            cancel:
+                'Cancelar',
+
+            done:
+                'Concluído',
+
+            startNewChat:
+                'Iniciar novo atendimento',
+
+            waitingForAgent:
+                'Aguardando atendente...',
+
+            waitingInQueue:
+                'Aguardando atendimento...',
+
+            statusReconnecting:
+                'Tentando reconectar...',
+
+            unexpectedError:
+                'Ocorreu um erro inesperado.',
+
+            validationMandatory:
+                'Este campo é obrigatório.',
+
+            pleaseSelect:
+                'Selecione...',
+
+            poweredBy:
+                'Desenvolvido por'
+
+        }
     );
 
 
-    // =====================================================
-    // ENVIA TIPO DO DOCUMENTO
-    // =====================================================
+    /* =====================================================
+       CSS DO CHAT
+    ===================================================== */
 
     cxone(
         'chat',
-        'setContactCustomField',
-        'tipodocumento',
-        tipoDocumento
+        'setCustomCss',
+        `
+
+        [data-selector="CONTENT"] {
+            background: #ffffff !important;
+        }
+
+
+        [data-selector="HEADER"] {
+            background: #0077b5 !important;
+            color: #ffffff !important;
+        }
+
+
+        [data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
+            background: #0077b5 !important;
+            color: #ffffff !important;
+            border-radius: 12px !important;
+        }
+
+
+        [data-selector="AGENT_MESSAGE_BUBBLE"] {
+            background: #f1f1f1 !important;
+            color: #222222 !important;
+            border-radius: 12px !important;
+        }
+
+
+        [data-selector="REPLY_BOX"] {
+            border-radius: 12px !important;
+        }
+
+
+        [data-selector="TEXTAREA"] {
+            border-radius: 10px !important;
+        }
+
+
+        [data-selector="SEND_BUTTON"] {
+            border-radius: 50% !important;
+        }
+
+        `
     );
 
 
-    // =====================================================
-    // LOG
-    // =====================================================
+    /* =====================================================
+       SELECIONAR ORIGEM
+    ===================================================== */
 
-    console.log(
-        "Origem enviada para CXone:",
-        origem
-    );
+    function selecionarOrigem(valor) {
 
-
-    console.log(
-        "Documento enviado para CXone:",
-        documento
-    );
+        origem = valor;
 
 
-    console.log(
-        "Tipo enviado para CXone:",
-        tipoDocumento
-    );
+        /* Remove seleção de todas */
+
+        document
+            .querySelectorAll('.opcao')
+            .forEach(function(opcao) {
+
+                opcao.classList.remove('selecionada');
+
+            });
 
 
-    // =====================================================
-    // STATUS
-    // =====================================================
+        /* Seleciona opção escolhida */
 
-    status.className = "sucesso";
-
-
-    status.innerHTML =
-        "Documento validado. Iniciando atendimento...";
+        var opcaoSelecionada =
+            document.getElementById(
+                'opcao-' + valor
+            );
 
 
-    // =====================================================
-    // ABRE WEB CHAT
-    // =====================================================
+        if (opcaoSelecionada) {
 
-    cxone(
-        'chat',
-        'openChatWindow'
-    );
+            opcaoSelecionada.classList.add(
+                'selecionada'
+            );
 
-}
+            var radio =
+                opcaoSelecionada.querySelector(
+                    'input[type="radio"]'
+                );
 
+            if (radio) {
+
+                radio.checked = true;
+
+            }
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CONFIRMAR ORIGEM
+    ===================================================== */
+
+    function confirmarOrigem() {
+
+        document
+            .getElementById('telaOrigem')
+            .classList.remove('ativa');
+
+
+        document
+            .getElementById('telaDocumento')
+            .classList.add('ativa');
+
+    }
+
+
+    /* =====================================================
+       SELECIONAR CPF / CNPJ
+    ===================================================== */
+
+    function selecionarDocumento(tipo) {
+
+        tipoDocumento = tipo;
+
+
+        var btnCPF =
+            document.getElementById('btnCPF');
+
+        var btnCNPJ =
+            document.getElementById('btnCNPJ');
+
+
+        btnCPF.classList.remove('selecionado');
+
+        btnCNPJ.classList.remove('selecionado');
+
+
+        if (tipo === 'CPF') {
+
+            btnCPF.classList.add('selecionado');
+
+            document.getElementById(
+                'labelDocumento'
+            ).innerText = 'CPF';
+
+            document.getElementById(
+                'documento'
+            ).placeholder = 'Digite seu CPF';
+
+        }
+
+
+        if (tipo === 'CNPJ') {
+
+            btnCNPJ.classList.add('selecionado');
+
+            document.getElementById(
+                'labelDocumento'
+            ).innerText = 'CNPJ';
+
+            document.getElementById(
+                'documento'
+            ).placeholder = 'Digite seu CNPJ';
+
+        }
+
+
+        document.getElementById(
+            'campoDocumento'
+        ).style.display = 'block';
+
+
+        document.getElementById(
+            'btnDocumento'
+        ).style.display = 'block';
+
+
+        document.getElementById(
+            'documento'
+        ).value = '';
+
+
+        document.getElementById(
+            'documento'
+        ).focus();
+
+    }
+
+
+    /* =====================================================
+       VALIDAR CPF
+    ===================================================== */
+
+    function validarCPF(cpf) {
+
+        cpf = cpf.replace(/\D/g, '');
+
+
+        if (cpf.length !== 11) {
+
+            return false;
+
+        }
+
+
+        /* Rejeita números repetidos */
+
+        if (/^(\d)\1+$/.test(cpf)) {
+
+            return false;
+
+        }
+
+
+        var soma = 0;
+
+        var resto;
+
+
+        for (var i = 1; i <= 9; i++) {
+
+            soma +=
+                parseInt(
+                    cpf.substring(i - 1, i)
+                ) * (11 - i);
+
+        }
+
+
+        resto = (soma * 10) % 11;
+
+
+        if (resto === 10) {
+
+            resto = 0;
+
+        }
+
+
+        if (
+            resto !==
+            parseInt(
+                cpf.substring(9, 10)
+            )
+        ) {
+
+            return false;
+
+        }
+
+
+        soma = 0;
+
+
+        for (var i = 1; i <= 10; i++) {
+
+            soma +=
+                parseInt(
+                    cpf.substring(i - 1, i)
+                ) * (12 - i);
+
+        }
+
+
+        resto = (soma * 10) % 11;
+
+
+        if (resto === 10) {
+
+            resto = 0;
+
+        }
+
+
+        if (
+            resto !==
+            parseInt(
+                cpf.substring(10, 11)
+            )
+        ) {
+
+            return false;
+
+        }
+
+
+        return true;
+
+    }
+
+
+    /* =====================================================
+       VALIDAR CNPJ
+    ===================================================== */
+
+    function validarCNPJ(cnpj) {
+
+        cnpj = cnpj.replace(/\D/g, '');
+
+
+        if (cnpj.length !== 14) {
+
+            return false;
+
+        }
+
+
+        if (/^(\d)\1+$/.test(cnpj)) {
+
+            return false;
+
+        }
+
+
+        var tamanho = cnpj.length - 2;
+
+        var numeros =
+            cnpj.substring(
+                0,
+                tamanho
+            );
+
+        var digitos =
+            cnpj.substring(
+                tamanho
+            );
+
+        var soma = 0;
+
+        var pos = tamanho - 7;
+
+
+        for (var i = tamanho; i >= 1; i--) {
+
+            soma +=
+                parseInt(
+                    numeros.charAt(
+                        tamanho - i
+                    )
+                ) * pos--;
+
+            if (pos < 2) {
+
+                pos = 9;
+
+            }
+
+        }
+
+
+        var resultado =
+            soma % 11 < 2
+                ? 0
+                : 11 - (soma % 11);
+
+
+        if (
+            resultado !==
+            parseInt(digitos.charAt(0))
+        ) {
+
+            return false;
+
+        }
+
+
+        tamanho = tamanho + 1;
+
+        numeros =
+            cnpj.substring(
+                0,
+                tamanho
+            );
+
+        soma = 0;
+
+        pos = tamanho - 7;
+
+
+        for (var i = tamanho; i >= 1; i--) {
+
+            soma +=
+                parseInt(
+                    numeros.charAt(
+                        tamanho - i
+                    )
+                ) * pos--;
+
+            if (pos < 2) {
+
+                pos = 9;
+
+            }
+
+        }
+
+
+        resultado =
+            soma % 11 < 2
+                ? 0
+                : 11 - (soma % 11);
+
+
+        if (
+            resultado !==
+            parseInt(digitos.charAt(1))
+        ) {
+
+            return false;
+
+        }
+
+
+        return true;
+
+    }
+
+
+    /* =====================================================
+       VALIDAR DOCUMENTO
+    ===================================================== */
+
+    function validarEContinuar() {
+
+        var documento =
+            document.getElementById(
+                'documento'
+            ).value
+            .replace(/\D/g, '');
+
+
+        var erro =
+            document.getElementById(
+                'erroDocumento'
+            );
+
+
+        erro.style.display = 'none';
+
+
+        if (tipoDocumento === '') {
+
+            erro.innerText =
+                'Selecione CPF ou CNPJ.';
+
+            erro.style.display = 'block';
+
+            return;
+
+        }
+
+
+        var valido = false;
+
+
+        if (tipoDocumento === 'CPF') {
+
+            valido =
+                validarCPF(documento);
+
+        }
+
+
+        if (tipoDocumento === 'CNPJ') {
+
+            valido =
+                validarCNPJ(documento);
+
+        }
+
+
+        if (!valido) {
+
+            erro.innerText =
+                'Documento inválido.';
+
+            erro.style.display = 'block';
+
+            return;
+
+        }
+
+
+        /* ==============================================
+           DOCUMENTO VALIDADO
+        ============================================== */
+
+        documentoValidado = documento;
+
+
+        /* Limpa eventual erro */
+
+        erro.style.display = 'none';
+
+
+        /* Vai para tela de contrato */
+
+        document
+            .getElementById('telaDocumento')
+            .classList.remove('ativa');
+
+
+        document
+            .getElementById('telaContrato')
+            .classList.add('ativa');
+
+
+        document
+            .getElementById('idcontrato')
+            .focus();
+
+    }
+
+
+    /* =====================================================
+       VALIDAR ID CONTRATO
+    ===================================================== */
+
+    function validarContratoEIniciarChat() {
+
+        var idcontrato =
+            document.getElementById(
+                'idcontrato'
+            ).value.trim();
+
+
+        var erroContrato =
+            document.getElementById(
+                'erroContrato'
+            );
+
+
+        erroContrato.style.display = 'none';
+
+
+        /* ==============================================
+           VALIDAÇÃO BÁSICA
+        ============================================== */
+
+        if (idcontrato === '') {
+
+            erroContrato.innerText =
+                'Informe o ID do contrato.';
+
+            erroContrato.style.display =
+                'block';
+
+            return;
+
+        }
+
+
+        /* ==============================================
+           ENVIA DADOS PARA O CXONE
+        ============================================== */
+
+        cxone(
+            'chat',
+            'setContactCustomField',
+            'origem',
+            origem
+        );
+
+
+        cxone(
+            'chat',
+            'setContactCustomField',
+            'documento',
+            documentoValidado
+        );
+
+
+        cxone(
+            'chat',
+            'setContactCustomField',
+            'tipodocumento',
+            tipoDocumento
+        );
+
+
+        cxone(
+            'chat',
+            'setContactCustomField',
+            'idcontrato',
+            idcontrato
+        );
+
+
+        /* ==============================================
+           ABRE O CHAT
+        ============================================== */
+
+        cxone(
+            'chat',
+            'openChatWindow'
+        );
+
+    }
+
+
+    /* =====================================================
+       ENTER NO ID DO CONTRATO
+    ===================================================== */
+
+    document
+        .getElementById('idcontrato')
+        .addEventListener(
+            'keypress',
+            function(event) {
+
+                if (event.key === 'Enter') {
+
+                    validarContratoEIniciarChat();
+
+                }
+
+            }
+        );
+
+
+    /* =====================================================
+       ENTER NO DOCUMENTO
+    ===================================================== */
+
+    document
+        .getElementById('documento')
+        .addEventListener(
+            'keypress',
+            function(event) {
+
+                if (event.key === 'Enter') {
+
+                    validarEContinuar();
+
+                }
+
+            }
+        );
 
 </script>
 
-
 </body>
-
 </html>
