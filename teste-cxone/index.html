@@ -394,6 +394,15 @@
         }
 
 
+        .btn:disabled {
+
+            background: #999999;
+
+            cursor: not-allowed;
+
+        }
+
+
         /* =================================================
            ERRO
         ================================================= */
@@ -534,7 +543,6 @@
         class="tela ativa"
     >
 
-
         <div class="titulo">
 
             <h2>
@@ -546,7 +554,6 @@
             </p>
 
         </div>
-
 
 
         <div class="opcoes">
@@ -582,7 +589,6 @@
             </div>
 
 
-
             <!-- APP B2B -->
 
             <div
@@ -612,7 +618,6 @@
             </div>
 
 
-
             <!-- CENTRAL B2B -->
 
             <div
@@ -640,7 +645,6 @@
                 </div>
 
             </div>
-
 
 
             <!-- CENTRAL B2C -->
@@ -674,14 +678,11 @@
         </div>
 
 
-
         <button
             class="btn"
             onclick="confirmarOrigem()"
         >
-
             Continuar
-
         </button>
 
     </div>
@@ -697,7 +698,6 @@
         class="tela"
     >
 
-
         <div class="titulo">
 
             <h2>
@@ -711,20 +711,15 @@
         </div>
 
 
-
         <div class="documentos">
-
 
             <button
                 class="btn-documento"
                 id="btnCPF"
                 onclick="selecionarDocumento('CPF')"
             >
-
                 CPF
-
             </button>
-
 
 
             <button
@@ -732,13 +727,10 @@
                 id="btnCNPJ"
                 onclick="selecionarDocumento('CNPJ')"
             >
-
                 CNPJ
-
             </button>
 
         </div>
-
 
 
         <div
@@ -748,9 +740,7 @@
         >
 
             <label id="labelDocumento">
-
                 CPF
-
             </label>
 
 
@@ -766,13 +756,10 @@
                 id="erroDocumento"
                 class="erro"
             >
-
                 Documento inválido.
-
             </div>
 
         </div>
-
 
 
         <button
@@ -781,9 +768,7 @@
             onclick="validarEContinuar()"
             style="display:none;"
         >
-
             Continuar
-
         </button>
 
     </div>
@@ -799,7 +784,6 @@
         class="tela"
     >
 
-
         <div class="titulo">
 
             <h2>
@@ -813,13 +797,10 @@
         </div>
 
 
-
         <div class="campo">
 
             <label for="idcontrato">
-
                 ID do Contrato
-
             </label>
 
 
@@ -835,26 +816,21 @@
                 id="erroContrato"
                 class="erro"
             >
-
                 Informe o ID do contrato.
-
             </div>
 
         </div>
 
 
-
         <button
             class="btn"
+            id="btnIniciar"
             onclick="validarContratoEIniciarChat()"
         >
-
             Iniciar atendimento
-
         </button>
 
     </div>
-
 
 </div>
 
@@ -937,7 +913,7 @@
 
 
     /* =====================================================
-       REMOVER PESQUISA INICIAL / NOME
+       REMOVER PRE-SURVEY / NOME
     ===================================================== */
 
     cxone(
@@ -948,7 +924,7 @@
 
 
     /* =====================================================
-       MENSAGEM AUTOMÁTICA INICIAL
+       CONFIGURAR MENSAGEM AUTOMÁTICA
     ===================================================== */
 
     cxone(
@@ -959,7 +935,7 @@
 
 
     /* =====================================================
-       DEIXAR A MENSAGEM AUTOMÁTICA VISÍVEL
+       DEIXAR PRIMEIRA MENSAGEM VISÍVEL
     ===================================================== */
 
     cxone(
@@ -1031,7 +1007,7 @@
 
 
     /* =====================================================
-       CSS PERSONALIZADO DO CHAT
+       CSS DO CHAT
     ===================================================== */
 
     cxone(
@@ -1162,13 +1138,21 @@
     function confirmarOrigem() {
 
         document
-            .getElementById('telaOrigem')
-            .classList.remove('ativa');
+            .getElementById(
+                'telaOrigem'
+            )
+            .classList.remove(
+                'ativa'
+            );
 
 
         document
-            .getElementById('telaDocumento')
-            .classList.add('ativa');
+            .getElementById(
+                'telaDocumento'
+            )
+            .classList.add(
+                'ativa'
+            );
 
     }
 
@@ -1184,11 +1168,15 @@
 
 
         var btnCPF =
-            document.getElementById('btnCPF');
+            document.getElementById(
+                'btnCPF'
+            );
 
 
         var btnCNPJ =
-            document.getElementById('btnCNPJ');
+            document.getElementById(
+                'btnCNPJ'
+            );
 
 
         btnCPF.classList.remove(
@@ -1243,12 +1231,14 @@
 
         document.getElementById(
             'campoDocumento'
-        ).style.display = 'block';
+        ).style.display =
+            'block';
 
 
         document.getElementById(
             'btnDocumento'
-        ).style.display = 'block';
+        ).style.display =
+            'block';
 
 
         document.getElementById(
@@ -1682,6 +1672,12 @@
             );
 
 
+        var botao =
+            document.getElementById(
+                'btnIniciar'
+            );
+
+
         erroContrato.style.display =
             'none';
 
@@ -1701,6 +1697,17 @@
             return;
 
         }
+
+
+        /* ==========================================
+           DESABILITA BOTÃO
+        ========================================== */
+
+        botao.disabled = true;
+
+        botao.innerText =
+            'Iniciando atendimento...';
+
 
 
         /* ==========================================
@@ -1748,6 +1755,17 @@
             'setContactCustomField',
             'idcontrato',
             idcontrato
+        );
+
+
+        /* ==========================================
+           ATIVAR MENSAGEM AUTOMÁTICA
+        ========================================== */
+
+        cxone(
+            'chat',
+            'sendFirstMessageAutomatically',
+            true
         );
 
 
