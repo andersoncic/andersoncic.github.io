@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Atendimento Do App</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Central de Atendimento</title>
+
 
     <style>
 
@@ -15,244 +22,524 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
+
         body {
+
             background: #f5f5f5;
+
             min-height: 100vh;
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             padding: 20px;
+
         }
+
 
         .container {
+
             width: 100%;
+
             max-width: 500px;
+
             background: #ffffff;
+
             border-radius: 16px;
+
             padding: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.10);
+
         }
+
+
+        /* =================================================
+           ÍCONE GENÉRICO DE ATENDIMENTO
+        ================================================= */
 
         .logo {
+
             text-align: center;
+
             margin-bottom: 25px;
+
         }
 
-        .logo h1 {
-            color: #0077b5;
-            font-size: 28px;
-            font-weight: bold;
+
+        .logo-icon {
+
+            width: 90px;
+
+            height: 90px;
+
+            margin: 0 auto 12px auto;
+
+            border-radius: 50%;
+
+            background: #eef7fc;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
         }
+
+
+        .logo-icon svg {
+
+            width: 58px;
+
+            height: 58px;
+
+        }
+
 
         .logo p {
-            margin-top: 8px;
-            color: #666;
+
+            color: #666666;
+
             font-size: 14px;
+
         }
+
+
+        /* =================================================
+           TÍTULOS
+        ================================================= */
 
         .titulo {
+
             text-align: center;
+
             margin-bottom: 20px;
+
         }
+
 
         .titulo h2 {
+
             font-size: 21px;
-            color: #333;
+
+            color: #333333;
+
             margin-bottom: 8px;
+
         }
+
 
         .titulo p {
-            color: #777;
+
+            color: #777777;
+
             font-size: 14px;
+
         }
 
-        /* =========================
-           CANAIS
-        ========================= */
 
-        .opcoes {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .opcao {
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .opcao:hover {
-            border-color: #0077b5;
-            background: #f7fcff;
-        }
-
-        .opcao.selecionada {
-            border-color: #0077b5;
-            background: #eef9ff;
-        }
-
-        .opcao input {
-            width: 18px;
-            height: 18px;
-            accent-color: #0077b5;
-        }
-
-        .opcao-texto strong {
-            display: block;
-            color: #333;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .opcao-texto span {
-            color: #777;
-            font-size: 13px;
-        }
-
-        /* =========================
-           BOTÕES DOCUMENTO
-        ========================= */
-
-        .documentos {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .btn-documento {
-            flex: 1;
-            padding: 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            background: #ffffff;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-            transition: 0.2s;
-        }
-
-        .btn-documento:hover {
-            border-color: #0077b5;
-        }
-
-        .btn-documento.selecionado {
-            background: #0077b5;
-            border-color: #0077b5;
-            color: #ffffff;
-        }
-
-        /* =========================
-           INPUT
-        ========================= */
-
-        .campo {
-            margin-top: 20px;
-        }
-
-        .campo label {
-            display: block;
-            font-size: 14px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .campo input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .campo input:focus {
-            border-color: #0077b5;
-        }
-
-        /* =========================
-           BOTÃO PRINCIPAL
-        ========================= */
-
-        .btn {
-            width: 100%;
-            margin-top: 20px;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background: #0077b5;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn:hover {
-            background: #005f91;
-        }
-
-        .btn:disabled {
-            background: #aaa;
-            cursor: not-allowed;
-        }
-
-        /* =========================
-           MENSAGEM DE ERRO
-        ========================= */
-
-        .erro {
-            color: #d93025;
-            font-size: 13px;
-            margin-top: 8px;
-            display: none;
-        }
-
-        /* =========================
-           OCULTAR TELAS
-        ========================= */
+        /* =================================================
+           TELAS
+        ================================================= */
 
         .tela {
+
             display: none;
+
         }
 
+
         .tela.ativa {
+
             display: block;
+
+        }
+
+
+        /* =================================================
+           OPÇÕES DE CANAL
+        ================================================= */
+
+        .opcoes {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+        }
+
+
+        .opcao {
+
+            border: 2px solid #e0e0e0;
+
+            border-radius: 12px;
+
+            padding: 16px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .opcao:hover {
+
+            border-color: #0077b5;
+
+            background: #f7fcff;
+
+        }
+
+
+        .opcao.selecionada {
+
+            border-color: #0077b5;
+
+            background: #eef9ff;
+
+        }
+
+
+        .opcao input {
+
+            width: 18px;
+
+            height: 18px;
+
+            accent-color: #0077b5;
+
+        }
+
+
+        .opcao-texto strong {
+
+            display: block;
+
+            color: #333333;
+
+            font-size: 16px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .opcao-texto span {
+
+            color: #777777;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =================================================
+           CPF / CNPJ
+        ================================================= */
+
+        .documentos {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .btn-documento {
+
+            flex: 1;
+
+            padding: 16px;
+
+            border: 2px solid #e0e0e0;
+
+            border-radius: 12px;
+
+            background: #ffffff;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            color: #333333;
+
+            transition: 0.2s;
+
+        }
+
+
+        .btn-documento:hover {
+
+            border-color: #0077b5;
+
+        }
+
+
+        .btn-documento.selecionado {
+
+            background: #0077b5;
+
+            border-color: #0077b5;
+
+            color: #ffffff;
+
+        }
+
+
+        /* =================================================
+           CAMPOS
+        ================================================= */
+
+        .campo {
+
+            margin-top: 20px;
+
+        }
+
+
+        .campo label {
+
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #333333;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .campo input {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 2px solid #dddddd;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            outline: none;
+
+        }
+
+
+        .campo input:focus {
+
+            border-color: #0077b5;
+
+        }
+
+
+        /* =================================================
+           BOTÃO
+        ================================================= */
+
+        .btn {
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #0077b5;
+
+            color: #ffffff;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .btn:hover {
+
+            background: #005f91;
+
+        }
+
+
+        /* =================================================
+           ERRO
+        ================================================= */
+
+        .erro {
+
+            color: #d93025;
+
+            font-size: 13px;
+
+            margin-top: 8px;
+
+            display: none;
+
         }
 
     </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
-    <!-- =========================
+
+    <!-- =================================================
          CABEÇALHO
-    ========================= -->
+    ================================================= -->
 
     <div class="logo">
-        <h1>Atendimento App</h1>
-        <p>Central de Atendimento</p>
+
+        <div class="logo-icon">
+
+            <!-- ÍCONE GENÉRICO DE ATENDIMENTO -->
+
+            <svg
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+
+                <!-- Cabeça -->
+
+                <circle
+                    cx="50"
+                    cy="42"
+                    r="22"
+                    fill="#30445A"
+                />
+
+
+                <!-- Corpo -->
+
+                <path
+                    d="M20 90
+                       C22 67 34 58 50 58
+                       C66 58 78 67 80 90
+                       Z"
+                    fill="#30445A"
+                />
+
+
+                <!-- Fone esquerdo -->
+
+                <rect
+                    x="22"
+                    y="35"
+                    width="10"
+                    height="28"
+                    rx="5"
+                    fill="#30445A"
+                />
+
+
+                <!-- Fone direito -->
+
+                <rect
+                    x="68"
+                    y="35"
+                    width="10"
+                    height="28"
+                    rx="5"
+                    fill="#30445A"
+                />
+
+
+                <!-- Arco -->
+
+                <path
+                    d="M28 43
+                       C28 15 72 15 72 43"
+                    fill="none"
+                    stroke="#30445A"
+                    stroke-width="7"
+                    stroke-linecap="round"
+                />
+
+
+                <!-- Microfone -->
+
+                <path
+                    d="M68 58
+                       C63 67 54 68 48 63"
+                    fill="none"
+                    stroke="#30445A"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                />
+
+
+                <circle
+                    cx="47"
+                    cy="62"
+                    r="5"
+                    fill="#30445A"
+                />
+
+            </svg>
+
+        </div>
+
+
+        <p>
+            Central de Atendimento
+        </p>
+
     </div>
 
 
-    <!-- =====================================================
-         TELA 1 - SELEÇÃO DO CANAL
-    ====================================================== -->
 
-    <div id="telaOrigem" class="tela ativa">
+    <!-- =================================================
+         TELA 1 - ORIGEM
+    ================================================= -->
+
+    <div
+        id="telaOrigem"
+        class="tela ativa"
+    >
+
 
         <div class="titulo">
 
-            <h2>Como você deseja ser atendido?</h2>
+            <h2>
+                Como você deseja ser atendido?
+            </h2>
 
             <p>
                 Selecione o canal para continuar
@@ -261,7 +548,9 @@
         </div>
 
 
+
         <div class="opcoes">
+
 
             <!-- APP B2C -->
 
@@ -280,7 +569,9 @@
 
                 <div class="opcao-texto">
 
-                    <strong>App B2C</strong>
+                    <strong>
+                        App B2C
+                    </strong>
 
                     <span>
                         Atendimento para clientes residenciais
@@ -289,6 +580,7 @@
                 </div>
 
             </div>
+
 
 
             <!-- APP B2B -->
@@ -307,7 +599,9 @@
 
                 <div class="opcao-texto">
 
-                    <strong>App B2B</strong>
+                    <strong>
+                        App B2B
+                    </strong>
 
                     <span>
                         Atendimento para clientes empresariais
@@ -316,6 +610,7 @@
                 </div>
 
             </div>
+
 
 
             <!-- CENTRAL B2B -->
@@ -334,7 +629,9 @@
 
                 <div class="opcao-texto">
 
-                    <strong>Central B2B</strong>
+                    <strong>
+                        Central B2B
+                    </strong>
 
                     <span>
                         Atendimento empresarial
@@ -343,6 +640,7 @@
                 </div>
 
             </div>
+
 
 
             <!-- CENTRAL B2C -->
@@ -361,7 +659,9 @@
 
                 <div class="opcao-texto">
 
-                    <strong>Central B2C</strong>
+                    <strong>
+                        Central B2C
+                    </strong>
 
                     <span>
                         Atendimento residencial
@@ -374,25 +674,35 @@
         </div>
 
 
+
         <button
             class="btn"
             onclick="confirmarOrigem()"
         >
+
             Continuar
+
         </button>
 
     </div>
 
 
-    <!-- =====================================================
-         TELA 2 - DOCUMENTO
-    ====================================================== -->
 
-    <div id="telaDocumento" class="tela">
+    <!-- =================================================
+         TELA 2 - DOCUMENTO
+    ================================================= -->
+
+    <div
+        id="telaDocumento"
+        class="tela"
+    >
+
 
         <div class="titulo">
 
-            <h2>Informe seu documento</h2>
+            <h2>
+                Informe seu documento
+            </h2>
 
             <p>
                 Selecione o tipo de documento
@@ -401,15 +711,20 @@
         </div>
 
 
+
         <div class="documentos">
+
 
             <button
                 class="btn-documento"
                 id="btnCPF"
                 onclick="selecionarDocumento('CPF')"
             >
+
                 CPF
+
             </button>
+
 
 
             <button
@@ -417,10 +732,13 @@
                 id="btnCNPJ"
                 onclick="selecionarDocumento('CNPJ')"
             >
+
                 CNPJ
+
             </button>
 
         </div>
+
 
 
         <div
@@ -430,8 +748,11 @@
         >
 
             <label id="labelDocumento">
+
                 CPF
+
             </label>
+
 
             <input
                 type="text"
@@ -440,14 +761,18 @@
                 autocomplete="off"
             >
 
+
             <div
                 id="erroDocumento"
                 class="erro"
             >
+
                 Documento inválido.
+
             </div>
 
         </div>
+
 
 
         <button
@@ -456,21 +781,30 @@
             onclick="validarEContinuar()"
             style="display:none;"
         >
+
             Continuar
+
         </button>
 
     </div>
 
 
-    <!-- =====================================================
-         TELA 3 - ID CONTRATO
-    ====================================================== -->
 
-    <div id="telaContrato" class="tela">
+    <!-- =================================================
+         TELA 3 - ID CONTRATO
+    ================================================= -->
+
+    <div
+        id="telaContrato"
+        class="tela"
+    >
+
 
         <div class="titulo">
 
-            <h2>Informe o ID do contrato</h2>
+            <h2>
+                Informe o ID do contrato
+            </h2>
 
             <p>
                 Digite o número do contrato para continuar
@@ -479,11 +813,15 @@
         </div>
 
 
+
         <div class="campo">
 
             <label for="idcontrato">
+
                 ID do Contrato
+
             </label>
+
 
             <input
                 type="text"
@@ -492,26 +830,34 @@
                 autocomplete="off"
             >
 
+
             <div
                 id="erroContrato"
                 class="erro"
             >
+
                 Informe o ID do contrato.
+
             </div>
 
         </div>
+
 
 
         <button
             class="btn"
             onclick="validarContratoEIniciarChat()"
         >
+
             Iniciar atendimento
+
         </button>
 
     </div>
 
+
 </div>
+
 
 
 <!-- =========================================================
@@ -519,6 +865,7 @@
 ========================================================= -->
 
 <script>
+
 
     /* =====================================================
        VARIÁVEIS
@@ -542,17 +889,24 @@
 
         window[n] = window[n] || function(){
 
-            (window[n].q = window[n].q || []).push(arguments);
+            (window[n].q =
+                window[n].q || []
+            ).push(arguments);
 
         };
 
         window[n].u = u;
 
-        var e = document.createElement("script");
+        var e =
+            document.createElement("script");
 
         e.type = "module";
 
-        e.src = u + "?" + Math.round(Date.now()/1e3/3600);
+        e.src =
+            u + "?" +
+            Math.round(
+                Date.now() / 1e3 / 3600
+            );
 
         document.head.appendChild(e);
 
@@ -560,6 +914,7 @@
         'cxone',
         'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js'
     );
+
 
 
     /* =====================================================
@@ -578,6 +933,41 @@
         5731,
         'chat_8a486555-27cf-4666-adf5-3de6195582dd'
     );
+
+
+
+    /* =====================================================
+       REMOVER PESQUISA INICIAL / NOME
+    ===================================================== */
+
+    cxone(
+        'chat',
+        'hidePreSurvey'
+    );
+
+
+
+    /* =====================================================
+       MENSAGEM AUTOMÁTICA INICIAL
+    ===================================================== */
+
+    cxone(
+        'chat',
+        'setFirstAutomatedMessageContent',
+        'Olá! 👋 Seja bem-vindo ao nosso atendimento. Recebemos seus dados e estamos preparando seu atendimento. Aguarde um momento, em breve um de nossos atendentes falará com você.'
+    );
+
+
+    /* =====================================================
+       DEIXAR A MENSAGEM AUTOMÁTICA VISÍVEL
+    ===================================================== */
+
+    cxone(
+        'chat',
+        'hideFirstSentMessage',
+        false
+    );
+
 
 
     /* =====================================================
@@ -639,8 +1029,9 @@
     );
 
 
+
     /* =====================================================
-       CSS DO CHAT
+       CSS PERSONALIZADO DO CHAT
     ===================================================== */
 
     cxone(
@@ -649,46 +1040,66 @@
         `
 
         [data-selector="CONTENT"] {
+
             background: #ffffff !important;
+
         }
 
 
         [data-selector="HEADER"] {
+
             background: #0077b5 !important;
+
             color: #ffffff !important;
+
         }
 
 
         [data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
+
             background: #0077b5 !important;
+
             color: #ffffff !important;
+
             border-radius: 12px !important;
+
         }
 
 
         [data-selector="AGENT_MESSAGE_BUBBLE"] {
+
             background: #f1f1f1 !important;
+
             color: #222222 !important;
+
             border-radius: 12px !important;
+
         }
 
 
         [data-selector="REPLY_BOX"] {
+
             border-radius: 12px !important;
+
         }
 
 
         [data-selector="TEXTAREA"] {
+
             border-radius: 10px !important;
+
         }
 
 
         [data-selector="SEND_BUTTON"] {
+
             border-radius: 50% !important;
+
         }
 
         `
     );
+
 
 
     /* =====================================================
@@ -700,18 +1111,18 @@
         origem = valor;
 
 
-        /* Remove seleção de todas */
-
         document
             .querySelectorAll('.opcao')
-            .forEach(function(opcao) {
+            .forEach(
+                function(opcao) {
 
-                opcao.classList.remove('selecionada');
+                    opcao.classList.remove(
+                        'selecionada'
+                    );
 
-            });
+                }
+            );
 
-
-        /* Seleciona opção escolhida */
 
         var opcaoSelecionada =
             document.getElementById(
@@ -725,10 +1136,12 @@
                 'selecionada'
             );
 
+
             var radio =
                 opcaoSelecionada.querySelector(
                     'input[type="radio"]'
                 );
+
 
             if (radio) {
 
@@ -739,6 +1152,7 @@
         }
 
     }
+
 
 
     /* =====================================================
@@ -759,6 +1173,7 @@
     }
 
 
+
     /* =====================================================
        SELECIONAR CPF / CNPJ
     ===================================================== */
@@ -771,41 +1186,57 @@
         var btnCPF =
             document.getElementById('btnCPF');
 
+
         var btnCNPJ =
             document.getElementById('btnCNPJ');
 
 
-        btnCPF.classList.remove('selecionado');
+        btnCPF.classList.remove(
+            'selecionado'
+        );
 
-        btnCNPJ.classList.remove('selecionado');
+
+        btnCNPJ.classList.remove(
+            'selecionado'
+        );
 
 
         if (tipo === 'CPF') {
 
-            btnCPF.classList.add('selecionado');
+            btnCPF.classList.add(
+                'selecionado'
+            );
+
 
             document.getElementById(
                 'labelDocumento'
             ).innerText = 'CPF';
 
+
             document.getElementById(
                 'documento'
-            ).placeholder = 'Digite seu CPF';
+            ).placeholder =
+                'Digite seu CPF';
 
         }
 
 
         if (tipo === 'CNPJ') {
 
-            btnCNPJ.classList.add('selecionado');
+            btnCNPJ.classList.add(
+                'selecionado'
+            );
+
 
             document.getElementById(
                 'labelDocumento'
             ).innerText = 'CNPJ';
 
+
             document.getElementById(
                 'documento'
-            ).placeholder = 'Digite seu CNPJ';
+            ).placeholder =
+                'Digite seu CNPJ';
 
         }
 
@@ -832,13 +1263,18 @@
     }
 
 
+
     /* =====================================================
        VALIDAR CPF
     ===================================================== */
 
     function validarCPF(cpf) {
 
-        cpf = cpf.replace(/\D/g, '');
+        cpf =
+            cpf.replace(
+                /\D/g,
+                ''
+            );
 
 
         if (cpf.length !== 11) {
@@ -847,8 +1283,6 @@
 
         }
 
-
-        /* Rejeita números repetidos */
 
         if (/^(\d)\1+$/.test(cpf)) {
 
@@ -862,17 +1296,25 @@
         var resto;
 
 
-        for (var i = 1; i <= 9; i++) {
+        for (
+            var i = 1;
+            i <= 9;
+            i++
+        ) {
 
             soma +=
                 parseInt(
-                    cpf.substring(i - 1, i)
+                    cpf.substring(
+                        i - 1,
+                        i
+                    )
                 ) * (11 - i);
 
         }
 
 
-        resto = (soma * 10) % 11;
+        resto =
+            (soma * 10) % 11;
 
 
         if (resto === 10) {
@@ -885,7 +1327,10 @@
         if (
             resto !==
             parseInt(
-                cpf.substring(9, 10)
+                cpf.substring(
+                    9,
+                    10
+                )
             )
         ) {
 
@@ -897,17 +1342,25 @@
         soma = 0;
 
 
-        for (var i = 1; i <= 10; i++) {
+        for (
+            var i = 1;
+            i <= 10;
+            i++
+        ) {
 
             soma +=
                 parseInt(
-                    cpf.substring(i - 1, i)
+                    cpf.substring(
+                        i - 1,
+                        i
+                    )
                 ) * (12 - i);
 
         }
 
 
-        resto = (soma * 10) % 11;
+        resto =
+            (soma * 10) % 11;
 
 
         if (resto === 10) {
@@ -920,7 +1373,10 @@
         if (
             resto !==
             parseInt(
-                cpf.substring(10, 11)
+                cpf.substring(
+                    10,
+                    11
+                )
             )
         ) {
 
@@ -934,13 +1390,18 @@
     }
 
 
+
     /* =====================================================
        VALIDAR CNPJ
     ===================================================== */
 
     function validarCNPJ(cnpj) {
 
-        cnpj = cnpj.replace(/\D/g, '');
+        cnpj =
+            cnpj.replace(
+                /\D/g,
+                ''
+            );
 
 
         if (cnpj.length !== 14) {
@@ -957,7 +1418,9 @@
         }
 
 
-        var tamanho = cnpj.length - 2;
+        var tamanho =
+            cnpj.length - 2;
+
 
         var numeros =
             cnpj.substring(
@@ -965,17 +1428,24 @@
                 tamanho
             );
 
+
         var digitos =
             cnpj.substring(
                 tamanho
             );
 
+
         var soma = 0;
 
-        var pos = tamanho - 7;
+        var pos =
+            tamanho - 7;
 
 
-        for (var i = tamanho; i >= 1; i--) {
+        for (
+            var i = tamanho;
+            i >= 1;
+            i--
+        ) {
 
             soma +=
                 parseInt(
@@ -983,6 +1453,7 @@
                         tamanho - i
                     )
                 ) * pos--;
+
 
             if (pos < 2) {
 
@@ -1001,7 +1472,9 @@
 
         if (
             resultado !==
-            parseInt(digitos.charAt(0))
+            parseInt(
+                digitos.charAt(0)
+            )
         ) {
 
             return false;
@@ -1009,7 +1482,9 @@
         }
 
 
-        tamanho = tamanho + 1;
+        tamanho =
+            tamanho + 1;
+
 
         numeros =
             cnpj.substring(
@@ -1017,12 +1492,18 @@
                 tamanho
             );
 
+
         soma = 0;
 
-        pos = tamanho - 7;
+        pos =
+            tamanho - 7;
 
 
-        for (var i = tamanho; i >= 1; i--) {
+        for (
+            var i = tamanho;
+            i >= 1;
+            i--
+        ) {
 
             soma +=
                 parseInt(
@@ -1030,6 +1511,7 @@
                         tamanho - i
                     )
                 ) * pos--;
+
 
             if (pos < 2) {
 
@@ -1048,7 +1530,9 @@
 
         if (
             resultado !==
-            parseInt(digitos.charAt(1))
+            parseInt(
+                digitos.charAt(1)
+            )
         ) {
 
             return false;
@@ -1061,6 +1545,7 @@
     }
 
 
+
     /* =====================================================
        VALIDAR DOCUMENTO
     ===================================================== */
@@ -1070,8 +1555,10 @@
         var documento =
             document.getElementById(
                 'documento'
-            ).value
-            .replace(/\D/g, '');
+            ).value.replace(
+                /\D/g,
+                ''
+            );
 
 
         var erro =
@@ -1080,7 +1567,8 @@
             );
 
 
-        erro.style.display = 'none';
+        erro.style.display =
+            'none';
 
 
         if (tipoDocumento === '') {
@@ -1088,7 +1576,8 @@
             erro.innerText =
                 'Selecione CPF ou CNPJ.';
 
-            erro.style.display = 'block';
+            erro.style.display =
+                'block';
 
             return;
 
@@ -1101,7 +1590,9 @@
         if (tipoDocumento === 'CPF') {
 
             valido =
-                validarCPF(documento);
+                validarCPF(
+                    documento
+                );
 
         }
 
@@ -1109,7 +1600,9 @@
         if (tipoDocumento === 'CNPJ') {
 
             valido =
-                validarCNPJ(documento);
+                validarCNPJ(
+                    documento
+                );
 
         }
 
@@ -1119,46 +1612,60 @@
             erro.innerText =
                 'Documento inválido.';
 
-            erro.style.display = 'block';
+            erro.style.display =
+                'block';
 
             return;
 
         }
 
 
-        /* ==============================================
+        /* ==========================================
            DOCUMENTO VALIDADO
-        ============================================== */
+        ========================================== */
 
-        documentoValidado = documento;
-
-
-        /* Limpa eventual erro */
-
-        erro.style.display = 'none';
+        documentoValidado =
+            documento;
 
 
-        /* Vai para tela de contrato */
+        erro.style.display =
+            'none';
 
-        document
-            .getElementById('telaDocumento')
-            .classList.remove('ativa');
 
+        /* ==========================================
+           IR PARA ID CONTRATO
+        ========================================== */
 
         document
-            .getElementById('telaContrato')
-            .classList.add('ativa');
+            .getElementById(
+                'telaDocumento'
+            )
+            .classList.remove(
+                'ativa'
+            );
 
 
         document
-            .getElementById('idcontrato')
+            .getElementById(
+                'telaContrato'
+            )
+            .classList.add(
+                'ativa'
+            );
+
+
+        document
+            .getElementById(
+                'idcontrato'
+            )
             .focus();
 
     }
 
 
+
     /* =====================================================
-       VALIDAR ID CONTRATO
+       VALIDAR CONTRATO E INICIAR CHAT
     ===================================================== */
 
     function validarContratoEIniciarChat() {
@@ -1175,12 +1682,13 @@
             );
 
 
-        erroContrato.style.display = 'none';
+        erroContrato.style.display =
+            'none';
 
 
-        /* ==============================================
-           VALIDAÇÃO BÁSICA
-        ============================================== */
+        /* ==========================================
+           VALIDAR ID CONTRATO
+        ========================================== */
 
         if (idcontrato === '') {
 
@@ -1195,9 +1703,9 @@
         }
 
 
-        /* ==============================================
-           ENVIA DADOS PARA O CXONE
-        ============================================== */
+        /* ==========================================
+           ENVIAR ORIGEM
+        ========================================== */
 
         cxone(
             'chat',
@@ -1207,6 +1715,10 @@
         );
 
 
+        /* ==========================================
+           ENVIAR DOCUMENTO
+        ========================================== */
+
         cxone(
             'chat',
             'setContactCustomField',
@@ -1214,6 +1726,10 @@
             documentoValidado
         );
 
+
+        /* ==========================================
+           ENVIAR TIPO DOCUMENTO
+        ========================================== */
 
         cxone(
             'chat',
@@ -1223,6 +1739,10 @@
         );
 
 
+        /* ==========================================
+           ENVIAR ID CONTRATO
+        ========================================== */
+
         cxone(
             'chat',
             'setContactCustomField',
@@ -1231,9 +1751,9 @@
         );
 
 
-        /* ==============================================
-           ABRE O CHAT
-        ============================================== */
+        /* ==========================================
+           ABRIR CHAT
+        ========================================== */
 
         cxone(
             'chat',
@@ -1243,17 +1763,22 @@
     }
 
 
+
     /* =====================================================
-       ENTER NO ID DO CONTRATO
+       ENTER - ID CONTRATO
     ===================================================== */
 
     document
-        .getElementById('idcontrato')
+        .getElementById(
+            'idcontrato'
+        )
         .addEventListener(
             'keypress',
             function(event) {
 
-                if (event.key === 'Enter') {
+                if (
+                    event.key === 'Enter'
+                ) {
 
                     validarContratoEIniciarChat();
 
@@ -1263,17 +1788,22 @@
         );
 
 
+
     /* =====================================================
-       ENTER NO DOCUMENTO
+       ENTER - DOCUMENTO
     ===================================================== */
 
     document
-        .getElementById('documento')
+        .getElementById(
+            'documento'
+        )
         .addEventListener(
             'keypress',
             function(event) {
 
-                if (event.key === 'Enter') {
+                if (
+                    event.key === 'Enter'
+                ) {
 
                     validarEContinuar();
 
@@ -1282,7 +1812,10 @@
             }
         );
 
+
 </script>
 
+
 </body>
+
 </html>
