@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Atendimento Do App</title>
@@ -228,6 +231,7 @@
         }
 
     </style>
+
 </head>
 
 <body>
@@ -239,8 +243,11 @@
     ========================= -->
 
     <div class="logo">
+
         <h1>Atendimento App</h1>
+
         <p>Central de Atendimento</p>
+
     </div>
 
 
@@ -531,7 +538,6 @@
     var documentoValidado = "";
 
 
-
     /* =====================================================
        CXONE LOADER
     ===================================================== */
@@ -590,6 +596,10 @@
         'pt-BR'
     );
 
+
+    /* =====================================================
+       TRADUÇÕES
+    ===================================================== */
 
     cxone(
         'chat',
@@ -725,10 +735,12 @@
                 'selecionada'
             );
 
+
             var radio =
                 opcaoSelecionada.querySelector(
                     'input[type="radio"]'
                 );
+
 
             if (radio) {
 
@@ -770,6 +782,7 @@
 
         var btnCPF =
             document.getElementById('btnCPF');
+
 
         var btnCNPJ =
             document.getElementById('btnCNPJ');
@@ -1011,11 +1024,13 @@
 
         tamanho = tamanho + 1;
 
+
         numeros =
             cnpj.substring(
                 0,
                 tamanho
             );
+
 
         soma = 0;
 
@@ -1232,6 +1247,28 @@
 
 
         /* ==============================================
+           PRIMEIRA MENSAGEM AUTOMÁTICA - TESTE
+        ============================================== */
+
+        cxone(
+            'chat',
+            'sendFirstMessageAutomatically',
+            'TESTE CXONE - mensagem automática'
+        );
+
+
+        /* ==============================================
+           MOSTRAR PRIMEIRA MENSAGEM
+        ============================================== */
+
+        cxone(
+            'chat',
+            'hideFirstSentMessage',
+            false
+        );
+
+
+        /* ==============================================
            ABRE O CHAT
         ============================================== */
 
@@ -1285,4 +1322,5 @@
 </script>
 
 </body>
+
 </html>
