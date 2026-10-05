@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -70,7 +71,7 @@
 
 /*
 ==========================================================
-CXONE - LOADER
+CXONE LOADER
 ==========================================================
 */
 
@@ -105,7 +106,7 @@ CXONE - LOADER
 
 /*
 ==========================================================
-CXONE - INIT
+CXONE INIT
 ==========================================================
 */
 
@@ -117,7 +118,7 @@ cxone(
 
 /*
 ==========================================================
-CXONE CHAT - INIT
+CHAT INIT
 ==========================================================
 */
 
@@ -144,65 +145,7 @@ cxone(
 
 /*
 ==========================================================
-TRADUÇÕES
-==========================================================
-*/
-
-cxone(
-    'chat',
-    'setTranslations',
-    {
-
-        replyBoxPlaceholder:
-            'Digite sua mensagem...',
-
-        sendMessageButton:
-            'Enviar mensagem',
-
-        retry:
-            'Tentar novamente',
-
-        cancel:
-            'Cancelar',
-
-        done:
-            'Concluído',
-
-        startNewChat:
-            'Iniciar novo atendimento',
-
-        waitingForAgent:
-            'Aguardando atendente...',
-
-        waitingInQueue:
-            'Aguardando atendimento...',
-
-        statusReconnecting:
-            'Tentando reconectar...',
-
-        unexpectedError:
-            'Ocorreu um erro inesperado.',
-
-        validationMandatory:
-            'Este campo é obrigatório.',
-
-        pleaseSelect:
-            'Selecione...',
-
-        poweredBy:
-            'Desenvolvido por'
-
-    }
-);
-
-
-/*
-==========================================================
 MENSAGEM AUTOMÁTICA
-==========================================================
-
-Essa mensagem deverá aparecer para o CLIENTE.
-
 ==========================================================
 */
 
@@ -217,64 +160,12 @@ cxone(
 ==========================================================
 MOSTRAR A MENSAGEM AUTOMÁTICA
 ==========================================================
-
-false = mensagem NÃO ficará escondida.
-
-==========================================================
 */
 
 cxone(
     'chat',
     'hideFirstSentMessage',
     false
-);
-
-
-/*
-==========================================================
-CSS DO CHAT
-==========================================================
-*/
-
-cxone(
-    'chat',
-    'setCustomCss',
-    `
-
-    [data-selector="CONTENT"] {
-        background: #ffffff !important;
-    }
-
-    [data-selector="HEADER"] {
-        background: #0077b5 !important;
-        color: #ffffff !important;
-    }
-
-    [data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
-        background: #0077b5 !important;
-        color: #ffffff !important;
-        border-radius: 12px !important;
-    }
-
-    [data-selector="AGENT_MESSAGE_BUBBLE"] {
-        background: #f1f1f1 !important;
-        color: #222222 !important;
-        border-radius: 12px !important;
-    }
-
-    [data-selector="REPLY_BOX"] {
-        border-radius: 12px !important;
-    }
-
-    [data-selector="TEXTAREA"] {
-        border-radius: 10px !important;
-    }
-
-    [data-selector="SEND_BUTTON"] {
-        border-radius: 50% !important;
-    }
-
-    `
 );
 
 
@@ -287,15 +178,51 @@ INICIAR ATENDIMENTO
 function iniciarAtendimento() {
 
     console.log(
-        'Abrindo janela CXone...'
+        '================================='
+    );
+
+    console.log(
+        'INICIANDO TESTE CXONE'
+    );
+
+    console.log(
+        '================================='
     );
 
 
     /*
     ------------------------------------------------------
-    ABRE O CHAT
+    1. INFORMAR NOME DO CLIENTE
+    ------------------------------------------------------
+
+    O seu canal possui "O seu nome" como campo
+    obrigatório.
+
+    Por isso vamos preencher o campo via API.
+
     ------------------------------------------------------
     */
+
+    console.log(
+        'Definindo nome do cliente...'
+    );
+
+    cxone(
+        'chat',
+        'setCustomerName',
+        'Teste'
+    );
+
+
+    /*
+    ------------------------------------------------------
+    2. ABRIR JANELA
+    ------------------------------------------------------
+    */
+
+    console.log(
+        'Abrindo janela CXone...'
+    );
 
     cxone(
         'chat',
@@ -305,24 +232,31 @@ function iniciarAtendimento() {
 
     /*
     ------------------------------------------------------
-    INICIA O CHAT AUTOMATICAMENTE
+    3. INICIAR SESSÃO AUTOMATICAMENTE
     ------------------------------------------------------
 
     IMPORTANTE:
 
-    autoStartSession deve ser a última
-    chamada CXone deste fluxo.
+    Essa é a última chamada CXone.
+
+    Não existe nenhuma chamada cxone()
+    depois dela.
 
     ------------------------------------------------------
     */
 
     console.log(
-        'Iniciando sessão automaticamente...'
+        'Executando autoStartSession...'
     );
 
     cxone(
         'chat',
         'autoStartSession'
+    );
+
+
+    console.log(
+        'autoStartSession executado.'
     );
 
 }
