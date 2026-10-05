@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teste CXone</title>
+</head>
+
+<body>
+
+    <button onclick="abrirChat()">
+        Iniciar atendimento
+    </button>
+
+
+    <script>
+
+        /* =========================================
+           CXONE LOADER
+        ========================================= */
+
+        (function(n,u){
+
+            window.CXoneDfo = n;
+
+            window[n] = window[n] || function(){
+
+                (window[n].q = window[n].q || []).push(arguments);
+
+            };
+
+            window[n].u = u;
+
+            var e = document.createElement("script");
+
+            e.type = "module";
+
+            e.src = u + "?" + Math.round(Date.now()/1e3/3600);
+
+            document.head.appendChild(e);
+
+        })(
+            'cxone',
+            'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js'
+        );
+
+
+        /* =========================================
+           CXONE INIT
+        ========================================= */
+
+        cxone(
+            'init',
+            '5731'
+        );
+
+
+        cxone(
+            'chat',
+            'init',
+            5731,
+            'chat_8a486555-27cf-4666-adf5-3de6195582dd'
+        );
+
+
+        /* =========================================
+           CONFIGURA PRIMEIRA MENSAGEM
+        ========================================= */
+
+        cxone(
+            'chat',
+            'sendFirstMessageAutomatically',
+            'TESTE CXONE'
+        );
+
+
+        /* =========================================
+           MOSTRA A MENSAGEM PARA O CLIENTE
+        ========================================= */
+
+        cxone(
+            'chat',
+            'hideFirstSentMessage',
+            false
+        );
+
+
+        /* =========================================
+           ABRIR CHAT
+        ========================================= */
+
+        function abrirChat() {
+
+            console.log(
+                'Abrindo chat...'
+            );
+
+            cxone(
+                'chat',
+                'openChatWindow'
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
