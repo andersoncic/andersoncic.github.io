@@ -2,108 +2,346 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Teste CXone</title>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Teste NICE CXone</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        button {
+            padding: 8px 12px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <button onclick="abrirChat()">
-        Iniciar atendimento
-    </button>
+
+<button onclick="iniciarAtendimento()">
+    Iniciar atendimento
+</button>
 
 
-    <script>
 
-        /* =========================================
-           CXONE LOADER
-        ========================================= */
+<!-- =========================================================
+     CXONE
+========================================================= -->
 
-        (function(n,u){
-
-            window.CXoneDfo = n;
-
-            window[n] = window[n] || function(){
-
-                (window[n].q = window[n].q || []).push(arguments);
-
-            };
-
-            window[n].u = u;
-
-            var e = document.createElement("script");
-
-            e.type = "module";
-
-            e.src = u + "?" + Math.round(Date.now()/1e3/3600);
-
-            document.head.appendChild(e);
-
-        })(
-            'cxone',
-            'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js'
-        );
+<script>
 
 
-        /* =========================================
-           CXONE INIT
-        ========================================= */
+/* =========================================================
+   CXONE LOADER
+========================================================= */
 
-        cxone(
-            'init',
-            '5731'
-        );
+(function(n, u) {
+
+    window.CXoneDfo = n;
+
+    window[n] = window[n] || function() {
+
+        (window[n].q = window[n].q || []).push(arguments);
+
+    };
+
+    window[n].u = u;
+
+    var e = document.createElement("script");
+
+    e.type = "module";
+
+    e.src =
+        u +
+        "?" +
+        Math.round(Date.now() / 1e3 / 3600);
+
+    document.head.appendChild(e);
+
+})(
+    'cxone',
+    'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js'
+);
 
 
-        cxone(
-            'chat',
-            'init',
-            5731,
-            'chat_8a486555-27cf-4666-adf5-3de6195582dd'
-        );
 
+/* =========================================================
+   INICIALIZAÇÃO CXONE
+========================================================= */
 
-        /* =========================================
-           CONFIGURA PRIMEIRA MENSAGEM
-        ========================================= */
 cxone(
-  'chat',
-  'setFirstAutomatedMessageContent',
-  'TESTE CXONE - mensagem automática para o cliente'
-);    
+    'init',
+    '5731'
+);
 
 
-        /* =========================================
-           MOSTRA A MENSAGEM PARA O CLIENTE
-        ========================================= */
-
-        cxone(
-            'chat',
-            'hideFirstSentMessage',
-            false
-        );
+cxone(
+    'chat',
+    'init',
+    5731,
+    'chat_8a486555-27cf-4666-adf5-3de6195582dd'
+);
 
 
-        /* =========================================
-           ABRIR CHAT
-        ========================================= */
 
-        function abrirChat() {
+/* =========================================================
+   IDIOMA
+========================================================= */
 
-            console.log(
-                'Abrindo chat...'
-            );
+cxone(
+    'chat',
+    'setLocale',
+    'pt-BR'
+);
 
-            cxone(
-                'chat',
-                'openChatWindow'
-            );
 
-        }
 
-    </script>
+/* =========================================================
+   TRADUÇÕES
+========================================================= */
+
+cxone(
+    'chat',
+    'setTranslations',
+    {
+
+        replyBoxPlaceholder:
+            'Digite sua mensagem...',
+
+        sendMessageButton:
+            'Enviar mensagem',
+
+        retry:
+            'Tentar novamente',
+
+        cancel:
+            'Cancelar',
+
+        done:
+            'Concluído',
+
+        startNewChat:
+            'Iniciar novo atendimento',
+
+        waitingForAgent:
+            'Aguardando atendente...',
+
+        waitingInQueue:
+            'Aguardando atendimento...',
+
+        statusReconnecting:
+            'Tentando reconectar...',
+
+        unexpectedError:
+            'Ocorreu um erro inesperado.',
+
+        validationMandatory:
+            'Este campo é obrigatório.',
+
+        pleaseSelect:
+            'Selecione...',
+
+        poweredBy:
+            'Desenvolvido por'
+
+    }
+);
+
+
+
+/* =========================================================
+   OCULTAR PRÉ-SURVEY
+========================================================= */
+
+cxone(
+    'chat',
+    'hidePreSurvey'
+);
+
+
+
+/* =========================================================
+   MENSAGEM AUTOMÁTICA INICIAL
+========================================================= */
+
+cxone(
+    'chat',
+    'setFirstAutomatedMessageContent',
+    'TESTE CXONE - mensagem automática para o cliente'
+);
+
+
+
+/* =========================================================
+   DEIXAR A MENSAGEM VISÍVEL PARA O CLIENTE
+========================================================= */
+
+cxone(
+    'chat',
+    'hideFirstSentMessage',
+    false
+);
+
+
+
+/* =========================================================
+   CSS PERSONALIZADO
+========================================================= */
+
+cxone(
+    'chat',
+    'setCustomCss',
+    `
+
+    /* ================================
+       ÁREA DO CHAT
+       ================================ */
+
+    [data-selector="CONTENT"] {
+
+        background: #ffffff !important;
+
+    }
+
+
+    /* ================================
+       CABEÇALHO
+       ================================ */
+
+    [data-selector="HEADER"] {
+
+        background: #0077b5 !important;
+
+        color: #ffffff !important;
+
+    }
+
+
+    /* ================================
+       MENSAGEM DO CLIENTE
+       ================================ */
+
+    [data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
+
+        background: #0077b5 !important;
+
+        color: #ffffff !important;
+
+        border-radius: 12px !important;
+
+    }
+
+
+    /* ================================
+       MENSAGEM DO AGENTE
+       ================================ */
+
+    [data-selector="AGENT_MESSAGE_BUBBLE"] {
+
+        background: #f1f1f1 !important;
+
+        color: #222222 !important;
+
+        border-radius: 12px !important;
+
+    }
+
+
+    /* ================================
+       ÁREA DE RESPOSTA
+       ================================ */
+
+    [data-selector="REPLY_BOX"] {
+
+        border-radius: 12px !important;
+
+    }
+
+
+    /* ================================
+       CAMPO DE TEXTO
+       ================================ */
+
+    [data-selector="TEXTAREA"] {
+
+        border-radius: 10px !important;
+
+    }
+
+
+    /* ================================
+       BOTÃO ENVIAR
+       ================================ */
+
+    [data-selector="SEND_BUTTON"] {
+
+        border-radius: 50% !important;
+
+    }
+
+    `
+);
+
+
+
+/* =========================================================
+   INICIAR ATENDIMENTO
+========================================================= */
+
+function iniciarAtendimento() {
+
+
+    console.log(
+        "Abrindo CXone..."
+    );
+
+
+    /* ---------------------------------------------
+       ABRE A JANELA DO CHAT
+    --------------------------------------------- */
+
+    cxone(
+        'chat',
+        'openChatWindow'
+    );
+
+
+    /* ---------------------------------------------
+       INICIA AUTOMATICAMENTE A SESSÃO
+    --------------------------------------------- */
+
+    cxone(
+        'chat',
+        'autoStartSession'
+    );
+
+
+    console.log(
+        "Solicitado início automático da sessão."
+    );
+
+}
+
+
+</script>
+
 
 </body>
 
