@@ -587,6 +587,31 @@
 
 
     /* =====================================================
+       PRIMEIRA MENSAGEM AUTOMÁTICA
+       
+       IMPORTANTE:
+       Configurada na inicialização do CXone.
+    ===================================================== */
+
+    cxone(
+        'chat',
+        'sendFirstMessageAutomatically',
+        'TESTE CXONE - mensagem automática'
+    );
+
+
+    /* =====================================================
+       DEIXA A PRIMEIRA MENSAGEM VISÍVEL PARA O CLIENTE
+    ===================================================== */
+
+    cxone(
+        'chat',
+        'hideFirstSentMessage',
+        false
+    );
+
+
+    /* =====================================================
        IDIOMA
     ===================================================== */
 
@@ -1243,28 +1268,6 @@
             'setContactCustomField',
             'idcontrato',
             idcontrato
-        );
-
-
-        /* ==============================================
-           PRIMEIRA MENSAGEM AUTOMÁTICA - TESTE
-        ============================================== */
-
-        cxone(
-            'chat',
-            'sendFirstMessageAutomatically',
-            'TESTE CXONE - mensagem automática'
-        );
-
-
-        /* ==============================================
-           MOSTRAR PRIMEIRA MENSAGEM
-        ============================================== */
-
-        cxone(
-            'chat',
-            'hideFirstSentMessage',
-            false
         );
 
 
