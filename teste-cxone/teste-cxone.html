@@ -37,16 +37,12 @@
 
             background: #0077b5;
 
-            color: #ffffff;
+            color: white;
 
             font-size: 16px;
             font-weight: bold;
 
             cursor: pointer;
-        }
-
-        button:hover {
-            background: #005f91;
         }
 
     </style>
@@ -59,7 +55,7 @@
     <h1>Teste DEV - CXone</h1>
 
     <p>
-        Teste de início automático do atendimento.
+        Teste de mensagem automática.
     </p>
 
     <button onclick="iniciarAtendimento()">
@@ -106,7 +102,7 @@ CXONE LOADER
 
 /*
 ==========================================================
-CXONE INIT
+INIT
 ==========================================================
 */
 
@@ -145,20 +141,39 @@ cxone(
 
 /*
 ==========================================================
-MENSAGEM AUTOMÁTICA
+NOME DO CLIENTE
 ==========================================================
 */
 
 cxone(
     'chat',
-    'setFirstAutomatedMessageContent',
+    'setCustomerName',
+    'Teste'
+);
+
+
+/*
+==========================================================
+MENSAGEM AUTOMÁTICA
+==========================================================
+
+Aqui estamos usando diretamente:
+
+sendFirstMessageAutomatically
+
+==========================================================
+*/
+
+cxone(
+    'chat',
+    'sendFirstMessageAutomatically',
     'TESTE CXONE - mensagem automática para o cliente'
 );
 
 
 /*
 ==========================================================
-MOSTRAR A MENSAGEM AUTOMÁTICA
+MOSTRAR MENSAGEM PARA O CLIENTE
 ==========================================================
 */
 
@@ -166,6 +181,33 @@ cxone(
     'chat',
     'hideFirstSentMessage',
     false
+);
+
+
+/*
+==========================================================
+MONITORAMENTO DOS EVENTOS CXONE
+==========================================================
+*/
+
+cxone(
+    'chat',
+    'onAnyPushUpdate',
+    function(evento) {
+
+        console.log(
+            '========== CXONE EVENT =========='
+        );
+
+        console.log(
+            evento
+        );
+
+        console.log(
+            '================================='
+        );
+
+    }
 );
 
 
@@ -182,7 +224,7 @@ function iniciarAtendimento() {
     );
 
     console.log(
-        'INICIANDO TESTE CXONE'
+        '1 - BOTÃO CLICADO'
     );
 
     console.log(
@@ -192,36 +234,12 @@ function iniciarAtendimento() {
 
     /*
     ------------------------------------------------------
-    1. INFORMAR NOME DO CLIENTE
-    ------------------------------------------------------
-
-    O seu canal possui "O seu nome" como campo
-    obrigatório.
-
-    Por isso vamos preencher o campo via API.
-
+    ABRIR CHAT
     ------------------------------------------------------
     */
 
     console.log(
-        'Definindo nome do cliente...'
-    );
-
-    cxone(
-        'chat',
-        'setCustomerName',
-        'Teste'
-    );
-
-
-    /*
-    ------------------------------------------------------
-    2. ABRIR JANELA
-    ------------------------------------------------------
-    */
-
-    console.log(
-        'Abrindo janela CXone...'
+        '2 - Abrindo janela CXone...'
     );
 
     cxone(
@@ -232,31 +250,41 @@ function iniciarAtendimento() {
 
     /*
     ------------------------------------------------------
-    3. INICIAR SESSÃO AUTOMATICAMENTE
+    AGUARDAR WIDGET
     ------------------------------------------------------
 
-    IMPORTANTE:
-
-    Essa é a última chamada CXone.
-
-    Não existe nenhuma chamada cxone()
-    depois dela.
+    Vamos dar tempo para o componente do CXone
+    terminar de abrir.
 
     ------------------------------------------------------
     */
 
-    console.log(
-        'Executando autoStartSession...'
-    );
+    setTimeout(
+        function() {
 
-    cxone(
-        'chat',
-        'autoStartSession'
-    );
+            console.log(
+                '3 - Executando autoStartSession...'
+            );
 
 
-    console.log(
-        'autoStartSession executado.'
+            /*
+            --------------------------------------------------
+            AUTO START
+            --------------------------------------------------
+            */
+
+            cxone(
+                'chat',
+                'autoStartSession'
+            );
+
+
+            console.log(
+                '4 - autoStartSession enviado.'
+            );
+
+        },
+        1500
     );
 
 }
