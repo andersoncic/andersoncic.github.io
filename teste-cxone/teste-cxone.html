@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
 
@@ -8,65 +9,38 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Teste CXone</title>
+    <title>Teste DEV - CXone</title>
 
     <style>
 
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #222;
-        }
+            padding: 40px;
 
-        .container {
-            max-width: 500px;
-            margin: 40px auto;
-            padding: 30px;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+            font-family: Arial, sans-serif;
+
+            background: #f5f5f5;
+
+            text-align: center;
         }
 
         h1 {
-            margin-top: 0;
-            text-align: center;
             color: #0077b5;
         }
 
-        .campo {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        select,
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
         button {
-            width: 100%;
-            padding: 14px;
+            padding: 15px 30px;
+
             border: none;
             border-radius: 8px;
+
             background: #0077b5;
+
             color: #ffffff;
+
             font-size: 16px;
             font-weight: bold;
+
             cursor: pointer;
         }
 
@@ -74,151 +48,22 @@
             background: #005f91;
         }
 
-        button:disabled {
-            background: #999;
-            cursor: not-allowed;
-        }
-
-        .mensagem {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 8px;
-            display: none;
-        }
-
-        .erro {
-            background: #ffe5e5;
-            color: #b00000;
-        }
-
-        .sucesso {
-            background: #e5f7e5;
-            color: #176b17;
-        }
-
     </style>
+
 </head>
+
 
 <body>
 
-<div class="container">
+    <h1>Teste DEV - CXone</h1>
 
-    <h1>Teste CXone</h1>
+    <p>
+        Teste de início automático do atendimento.
+    </p>
 
-    <!-- ORIGEM -->
-    <div class="campo">
-
-        <label for="origem">
-            Origem
-        </label>
-
-        <select id="origem">
-
-            <option value="">
-                Selecione...
-            </option>
-
-            <option value="appb2c">
-                App B2C
-            </option>
-
-            <option value="appb2b">
-                App B2B
-            </option>
-
-            <option value="centralb2b">
-                Central B2B
-            </option>
-
-            <option value="centralb2c">
-                Central B2C
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <!-- TIPO DOCUMENTO -->
-    <div class="campo">
-
-        <label for="tipoDocumento">
-            Tipo de documento
-        </label>
-
-        <select id="tipoDocumento">
-
-            <option value="">
-                Selecione...
-            </option>
-
-            <option value="CPF">
-                CPF
-            </option>
-
-            <option value="CNPJ">
-                CNPJ
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <!-- DOCUMENTO -->
-    <div class="campo">
-
-        <label for="documento">
-            CPF / CNPJ
-        </label>
-
-        <input
-            type="text"
-            id="documento"
-            placeholder="Digite o CPF ou CNPJ"
-            maxlength="18"
-        >
-
-    </div>
-
-
-    <!-- CONTRATO -->
-    <div class="campo">
-
-        <label for="idcontrato">
-            ID Contrato
-        </label>
-
-        <input
-            type="text"
-            id="idcontrato"
-            placeholder="Digite o ID do contrato"
-        >
-
-    </div>
-
-
-    <!-- BOTÃO -->
-    <button
-        id="btnIniciar"
-        onclick="validarContratoEIniciarChat()"
-    >
+    <button onclick="iniciarAtendimento()">
         Iniciar atendimento
     </button>
-
-
-    <div
-        id="mensagemErro"
-        class="mensagem erro"
-    ></div>
-
-
-    <div
-        id="mensagemSucesso"
-        class="mensagem sucesso"
-    ></div>
-
-</div>
 
 
 <script>
@@ -245,7 +90,10 @@ CXONE - LOADER
 
     e.type = "module";
 
-    e.src = u + "?" + Math.round(Date.now() / 1e3 / 3600);
+    e.src = u + "?" +
+        Math.round(
+            Date.now() / 1e3 / 3600
+        );
 
     document.head.appendChild(e);
 
@@ -257,7 +105,7 @@ CXONE - LOADER
 
 /*
 ==========================================================
-INICIALIZAÇÃO CXONE
+CXONE - INIT
 ==========================================================
 */
 
@@ -265,6 +113,13 @@ cxone(
     'init',
     '5731'
 );
+
+
+/*
+==========================================================
+CXONE CHAT - INIT
+==========================================================
+*/
 
 cxone(
     'chat',
@@ -343,11 +198,10 @@ cxone(
 
 /*
 ==========================================================
-MENSAGEM AUTOMÁTICA INICIAL
+MENSAGEM AUTOMÁTICA
 ==========================================================
 
-Essa é a mensagem que deverá aparecer
-PARA O CLIENTE quando o atendimento começar.
+Essa mensagem deverá aparecer para o CLIENTE.
 
 ==========================================================
 */
@@ -361,13 +215,10 @@ cxone(
 
 /*
 ==========================================================
-MOSTRAR A PRIMEIRA MENSAGEM
+MOSTRAR A MENSAGEM AUTOMÁTICA
 ==========================================================
 
-false = NÃO esconder a mensagem automática.
-
-Portanto o cliente deverá visualizar
-a mensagem no histórico do chat.
+false = mensagem NÃO ficará escondida.
 
 ==========================================================
 */
@@ -381,7 +232,7 @@ cxone(
 
 /*
 ==========================================================
-CSS PERSONALIZADO DO CHAT
+CSS DO CHAT
 ==========================================================
 */
 
@@ -429,495 +280,22 @@ cxone(
 
 /*
 ==========================================================
-FUNÇÕES DE VALIDAÇÃO
-==========================================================
-*/
-
-
-function somenteNumeros(valor) {
-
-    return valor.replace(/\D/g, '');
-
-}
-
-
-/*
-==========================================================
-VALIDAÇÃO CPF
-==========================================================
-*/
-
-function validarCPF(cpf) {
-
-    cpf = somenteNumeros(cpf);
-
-    if (cpf.length !== 11) {
-        return false;
-    }
-
-    if (/^(\d)\1+$/.test(cpf)) {
-        return false;
-    }
-
-    let soma = 0;
-
-    for (let i = 0; i < 9; i++) {
-
-        soma +=
-            parseInt(cpf.charAt(i)) *
-            (10 - i);
-
-    }
-
-    let resto = 11 - (soma % 11);
-
-    let digito1 =
-        resto >= 10 ? 0 : resto;
-
-    if (
-        digito1 !==
-        parseInt(cpf.charAt(9))
-    ) {
-
-        return false;
-
-    }
-
-
-    soma = 0;
-
-    for (let i = 0; i < 10; i++) {
-
-        soma +=
-            parseInt(cpf.charAt(i)) *
-            (11 - i);
-
-    }
-
-    resto = 11 - (soma % 11);
-
-    let digito2 =
-        resto >= 10 ? 0 : resto;
-
-    if (
-        digito2 !==
-        parseInt(cpf.charAt(10))
-    ) {
-
-        return false;
-
-    }
-
-    return true;
-
-}
-
-
-/*
-==========================================================
-VALIDAÇÃO CNPJ
-==========================================================
-*/
-
-function validarCNPJ(cnpj) {
-
-    cnpj = somenteNumeros(cnpj);
-
-    if (cnpj.length !== 14) {
-        return false;
-    }
-
-    if (/^(\d)\1+$/.test(cnpj)) {
-        return false;
-    }
-
-
-    let tamanho = 12;
-
-    let numeros =
-        cnpj.substring(
-            0,
-            tamanho
-        );
-
-    let digitos =
-        cnpj.substring(
-            tamanho
-        );
-
-
-    let soma = 0;
-
-    let pos = tamanho - 5;
-
-
-    for (let i = 0; i < tamanho; i++) {
-
-        soma +=
-            parseInt(numeros.charAt(i)) *
-            pos--;
-
-        if (pos < 2) {
-            pos = 9;
-        }
-
-    }
-
-
-    let resultado =
-        soma % 11 < 2
-            ? 0
-            : 11 - (soma % 11);
-
-
-    if (
-        resultado !==
-        parseInt(digitos.charAt(0))
-    ) {
-
-        return false;
-
-    }
-
-
-    tamanho = tamanho + 1;
-
-    numeros =
-        cnpj.substring(
-            0,
-            tamanho
-        );
-
-
-    soma = 0;
-
-    pos = tamanho - 5;
-
-
-    for (let i = 0; i < tamanho; i++) {
-
-        soma +=
-            parseInt(numeros.charAt(i)) *
-            pos--;
-
-        if (pos < 2) {
-            pos = 9;
-        }
-
-    }
-
-
-    resultado =
-        soma % 11 < 2
-            ? 0
-            : 11 - (soma % 11);
-
-
-    if (
-        resultado !==
-        parseInt(digitos.charAt(1))
-    ) {
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-/*
-==========================================================
-MENSAGENS
-==========================================================
-*/
-
-function mostrarErro(mensagem) {
-
-    const elemento =
-        document.getElementById(
-            'mensagemErro'
-        );
-
-    elemento.innerText = mensagem;
-
-    elemento.style.display =
-        'block';
-
-
-    document.getElementById(
-        'mensagemSucesso'
-    ).style.display =
-        'none';
-
-}
-
-
-function mostrarSucesso(mensagem) {
-
-    const elemento =
-        document.getElementById(
-            'mensagemSucesso'
-        );
-
-    elemento.innerText = mensagem;
-
-    elemento.style.display =
-        'block';
-
-
-    document.getElementById(
-        'mensagemErro'
-    ).style.display =
-        'none';
-
-}
-
-
-/*
-==========================================================
 INICIAR ATENDIMENTO
 ==========================================================
-
-IMPORTANTE:
-
-autoStartSession() precisa ser a ÚLTIMA
-chamada do CXone neste fluxo.
-
-==========================================================
 */
 
-function validarContratoEIniciarChat() {
-
-
-    console.log(
-        '========================================'
-    );
-
-    console.log(
-        'INICIANDO ATENDIMENTO CXONE'
-    );
-
-    console.log(
-        '========================================'
-    );
-
-
-    /*
-    ------------------------------------------------------
-    ORIGEM
-    ------------------------------------------------------
-    */
-
-    const origem =
-        document.getElementById(
-            'origem'
-        ).value;
-
-
-    if (!origem) {
-
-        mostrarErro(
-            'Selecione a origem do atendimento.'
-        );
-
-        return;
-
-    }
-
-
-    /*
-    ------------------------------------------------------
-    TIPO DOCUMENTO
-    ------------------------------------------------------
-    */
-
-    const tipoDocumento =
-        document.getElementById(
-            'tipoDocumento'
-        ).value;
-
-
-    if (!tipoDocumento) {
-
-        mostrarErro(
-            'Selecione o tipo de documento.'
-        );
-
-        return;
-
-    }
-
-
-    /*
-    ------------------------------------------------------
-    DOCUMENTO
-    ------------------------------------------------------
-    */
-
-    const documento =
-        document.getElementById(
-            'documento'
-        ).value;
-
-
-    const documentoValidado =
-        somenteNumeros(
-            documento
-        );
-
-
-    if (
-        tipoDocumento === 'CPF' &&
-        !validarCPF(
-            documentoValidado
-        )
-    ) {
-
-        mostrarErro(
-            'CPF inválido.'
-        );
-
-        return;
-
-    }
-
-
-    if (
-        tipoDocumento === 'CNPJ' &&
-        !validarCNPJ(
-            documentoValidado
-        )
-    ) {
-
-        mostrarErro(
-            'CNPJ inválido.'
-        );
-
-        return;
-
-    }
-
-
-    /*
-    ------------------------------------------------------
-    ID CONTRATO
-    ------------------------------------------------------
-    */
-
-    const idcontrato =
-        document.getElementById(
-            'idcontrato'
-        ).value.trim();
-
-
-    if (!idcontrato) {
-
-        mostrarErro(
-            'Digite o ID do contrato.'
-        );
-
-        return;
-
-    }
-
-
-    /*
-    ======================================================
-    DADOS VALIDADOS
-    ======================================================
-    */
-
-    console.log(
-        'Origem:',
-        origem
-    );
-
-    console.log(
-        'Tipo documento:',
-        tipoDocumento
-    );
-
-    console.log(
-        'Documento:',
-        documentoValidado
-    );
-
-    console.log(
-        'ID contrato:',
-        idcontrato
-    );
-
-
-    /*
-    ======================================================
-    ENVIO DOS CUSTOM FIELDS PARA O CXONE
-    ======================================================
-    */
-
-    cxone(
-        'chat',
-        'setContactCustomField',
-        'origem',
-        origem
-    );
-
-
-    cxone(
-        'chat',
-        'setContactCustomField',
-        'documento',
-        documentoValidado
-    );
-
-
-    cxone(
-        'chat',
-        'setContactCustomField',
-        'tipodocumento',
-        tipoDocumento
-    );
-
-
-    cxone(
-        'chat',
-        'setContactCustomField',
-        'idcontrato',
-        idcontrato
-    );
-
-
-    /*
-    ======================================================
-    CONFIGURAÇÃO DO CLIENTE
-    ======================================================
-
-    Como seu formulário do CXone possui "O seu nome"
-    como campo obrigatório, vamos informar um nome
-    diretamente para o teste.
-
-    ======================================================
-    */
-
-    cxone(
-        'chat',
-        'setCustomerName',
-        'Teste'
-    );
-
-
-    /*
-    ======================================================
-    ABRIR JANELA DO CHAT
-    ======================================================
-    */
+function iniciarAtendimento() {
 
     console.log(
         'Abrindo janela CXone...'
     );
 
+
+    /*
+    ------------------------------------------------------
+    ABRE O CHAT
+    ------------------------------------------------------
+    */
 
     cxone(
         'chat',
@@ -926,49 +304,25 @@ function validarContratoEIniciarChat() {
 
 
     /*
-    ======================================================
-    INICIAR SESSÃO AUTOMATICAMENTE
-    ======================================================
+    ------------------------------------------------------
+    INICIA O CHAT AUTOMATICAMENTE
+    ------------------------------------------------------
 
-    ATENÇÃO:
+    IMPORTANTE:
 
-    ESTA É A ÚLTIMA CHAMADA CXONE.
+    autoStartSession deve ser a última
+    chamada CXone deste fluxo.
 
-    Não coloque nenhuma chamada cxone()
-    depois desta linha.
-
-    ======================================================
+    ------------------------------------------------------
     */
 
     console.log(
         'Iniciando sessão automaticamente...'
     );
 
-
     cxone(
         'chat',
         'autoStartSession'
-    );
-
-
-    /*
-    ======================================================
-    INTERFACE
-    ======================================================
-    */
-
-    document.getElementById(
-        'btnIniciar'
-    ).disabled = true;
-
-
-    mostrarSucesso(
-        'Atendimento iniciado.'
-    );
-
-
-    console.log(
-        'Atendimento CXone iniciado.'
     );
 
 }
@@ -976,4 +330,5 @@ function validarContratoEIniciarChat() {
 </script>
 
 </body>
+
 </html>
