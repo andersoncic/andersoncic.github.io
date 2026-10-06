@@ -85,6 +85,8 @@
       poweredBy: 'Desenvolvido por'
     }
   );
+
+  
   cxone('chat', 'hidePreSurvey');
 
   /*
@@ -159,7 +161,33 @@
       }
     `
   );
+    /*
+    ------------------------------------------------------
+    ABRIR CHAT
+    ------------------------------------------------------
+    */
+  
+      cxone(
+        'chat',
+        'openChatWindow'
+    );
 
+  /*
+  --------------------------------------------------
+ AUTO START
+--------------------------------------------------
+            */
+
+            cxone(
+                'chat',
+                'autoStartSession'
+            );
+
+
+
+
+
+  
   /*
    * IMPORTANTE:
    * Esta página NÃO envia dados do cliente e NÃO abre o chat sozinha.
