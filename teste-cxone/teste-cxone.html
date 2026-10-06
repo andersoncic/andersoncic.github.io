@@ -69,6 +69,7 @@
 
 <script>
 
+
 /*
 ==========================================================
 CXONE LOADER
@@ -121,12 +122,9 @@ cxone(
 CHAT INIT
 ==========================================================
 
-LOCAL STORAGE
+storageType: local
 
-Mantém a sessão/histórico armazenado no WebView.
-
-O histórico será removido posteriormente quando
-o atendimento for encerrado.
+Mantém a sessão no armazenamento do WebView.
 
 ==========================================================
 */
@@ -173,17 +171,6 @@ cxone(
 ==========================================================
 MENSAGEM AUTOMÁTICA
 ==========================================================
-
-Esta mensagem é a primeira mensagem automática
-enviada em nome do cliente.
-
-Como estamos usando:
-
-hideFirstSentMessage = true
-
-ela fica escondida para o cliente.
-
-==========================================================
 */
 
 cxone(
@@ -197,11 +184,6 @@ cxone(
 ==========================================================
 ESCONDER PRIMEIRA MENSAGEM
 ==========================================================
-
-true = não mostrar a mensagem automática
-do lado do cliente.
-
-==========================================================
 */
 
 cxone(
@@ -213,47 +195,17 @@ cxone(
 
 /*
 ==========================================================
-MONITORAMENTO DE TODOS OS EVENTOS CXONE
-==========================================================
-
-Mantido para facilitar o diagnóstico no DEV.
-
-Abra:
-
-F12 > Console
-
-==========================================================
-*/
-
-cxone(
-    'chat',
-    'onAnyPushUpdate',
-    function(evento) {
-
-        console.log(
-            '========== CXONE EVENT =========='
-        );
-
-        console.log(evento);
-
-        console.log(
-            '================================='
-        );
-
-    }
-);
-
-
-/*
-==========================================================
 LIMPAR HISTÓRICO APÓS ENCERRAMENTO
 ==========================================================
 
+Quando o caso for encerrado:
+
 CaseStatusChanged
-Quando:
-status === 'closed'
-removemos:
-_BECustomerID
+        +
+status = closed
+
+remove o identificador da conversa armazenado
+no localStorage.
 
 ==========================================================
 */
@@ -264,88 +216,34 @@ cxone(
     ['CaseStatusChanged'],
     function(pushUpdatePayload) {
 
-        console.log(
-            '========== CASE STATUS CHANGED =========='
-        );
-
-        console.log(
-            pushUpdatePayload
-        );
-
-
-        /*
-        --------------------------------------------------
-        VALIDAR PAYLOAD
-        --------------------------------------------------
-        */
-
         if (
-            typeof pushUpdatePayload === 'undefined' ||
-            typeof pushUpdatePayload.data === 'undefined'
+            typeof pushUpdatePayload === 'undefined'
         ) {
-
-            console.log(
-                'Payload CaseStatusChanged inválido.'
-            );
-
             return;
-
         }
 
 
-        /*
-        --------------------------------------------------
-        OBTER STATUS DO CASO
-        --------------------------------------------------
-        */
+        if (
+            typeof pushUpdatePayload.data === 'undefined'
+        ) {
+            return;
+        }
+
 
         const caseData =
             pushUpdatePayload.data.case || {};
+
 
         const status =
             caseData.status;
 
 
-        console.log(
-            'Status do atendimento:',
-            status
-        );
-
-
-        /*
-        --------------------------------------------------
-        CASO ENCERRADO
-        --------------------------------------------------
-        */
-
-        if (status === 'closed') {
-
-            console.log(
-                'Atendimento encerrado.'
-            );
-
-            console.log(
-                'Limpando histórico do CXone...'
-            );
-
-
-            /*
-            ------------------------------------------------
-            REMOVE CUSTOMER ID
-            ------------------------------------------------
-            */
+        if (
+            status === 'closed'
+        ) {
 
             localStorage.removeItem(
                 '_BECustomerID'
-            );
-
-
-            console.log(
-                '_BECustomerID removido.'
-            );
-
-            console.log(
-                'Próximo atendimento será uma nova conversa.'
             );
 
         }
@@ -362,28 +260,12 @@ INICIAR ATENDIMENTO
 
 function iniciarAtendimento() {
 
-    console.log(
-        '================================='
-    );
-
-    console.log(
-        '1 - BOTÃO CLICADO'
-    );
-
-    console.log(
-        '================================='
-    );
-
 
     /*
     ------------------------------------------------------
     ABRIR CHAT
     ------------------------------------------------------
     */
-
-    console.log(
-        '2 - Abrindo janela CXone...'
-    );
 
     cxone(
         'chat',
@@ -400,14 +282,10 @@ function iniciarAtendimento() {
     setTimeout(
         function() {
 
-            console.log(
-                '3 - Executando autoStartSession...'
-            );
-
 
             /*
             --------------------------------------------------
-            INICIAR NOVA SESSÃO
+            INICIAR SESSÃO
             --------------------------------------------------
             */
 
@@ -417,20 +295,12 @@ function iniciarAtendimento() {
             );
 
 
-            console.log(
-                '4 - autoStartSession enviado.'
-            );
-
-
-            console.log(
-                '================================='
-            );
-
         },
         1500
     );
 
 }
+
 
 </script>
 
