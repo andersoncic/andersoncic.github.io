@@ -45,6 +45,10 @@
             cursor: pointer;
         }
 
+        button:hover {
+            background: #005f91;
+        }
+
     </style>
 
 </head>
@@ -102,7 +106,7 @@ CXONE LOADER
 
 /*
 ==========================================================
-INIT
+CXONE INIT
 ==========================================================
 */
 
@@ -117,9 +121,12 @@ cxone(
 CHAT INIT
 ==========================================================
 
-storageType: inMemory
+LOCAL STORAGE
 
-O CXone não persiste a sessão no navegador.
+Mantém a sessão/histórico armazenado no WebView.
+
+O histórico será removido posteriormente quando
+o atendimento for encerrado.
 
 ==========================================================
 */
@@ -131,7 +138,7 @@ cxone(
     'chat_8a486555-27cf-4666-adf5-3de6195582dd',
     undefined,
     {
-        storageType: 'inMemory'
+        storageType: 'local'
     }
 );
 
@@ -166,6 +173,17 @@ cxone(
 ==========================================================
 MENSAGEM AUTOMÁTICA
 ==========================================================
+
+Esta mensagem é a primeira mensagem automática
+enviada em nome do cliente.
+
+Como estamos usando:
+
+hideFirstSentMessage = true
+
+ela fica escondida para o cliente.
+
+==========================================================
 */
 
 cxone(
@@ -180,8 +198,8 @@ cxone(
 ESCONDER PRIMEIRA MENSAGEM
 ==========================================================
 
-true = esconde a mensagem automática do cliente, 
-essa mensagem esta sendo enviado direto pelo NICE
+true = não mostrar a mensagem automática
+do lado do cliente.
 
 ==========================================================
 */
@@ -195,7 +213,15 @@ cxone(
 
 /*
 ==========================================================
-MONITORAMENTO DOS EVENTOS
+MONITORAMENTO DE TODOS OS EVENTOS CXONE
+==========================================================
+
+Mantido para facilitar o diagnóstico no DEV.
+
+Abra:
+
+F12 > Console
+
 ==========================================================
 */
 
@@ -223,11 +249,11 @@ cxone(
 LIMPAR HISTÓRICO APÓS ENCERRAMENTO
 ==========================================================
 
-Quando o caso for encerrado pelo CXone,
-removemos o customerID armazenado.
-
-Na próxima sessão o CXone não deverá
-recuperar a conversa anterior.
+CaseStatusChanged
+Quando:
+status === 'closed'
+removemos:
+_BECustomerID
 
 ==========================================================
 */
@@ -235,13 +261,11 @@ recuperar a conversa anterior.
 cxone(
     'chat',
     'onPushUpdate',
-    [
-        'CaseStatusChanged'
-    ],
+    ['CaseStatusChanged'],
     function(pushUpdatePayload) {
 
         console.log(
-            '========== CASE STATUS =========='
+            '========== CASE STATUS CHANGED =========='
         );
 
         console.log(
@@ -249,19 +273,34 @@ cxone(
         );
 
 
+        /*
+        --------------------------------------------------
+        VALIDAR PAYLOAD
+        --------------------------------------------------
+        */
+
         if (
             typeof pushUpdatePayload === 'undefined' ||
             typeof pushUpdatePayload.data === 'undefined'
         ) {
+
+            console.log(
+                'Payload CaseStatusChanged inválido.'
+            );
 
             return;
 
         }
 
 
+        /*
+        --------------------------------------------------
+        OBTER STATUS DO CASO
+        --------------------------------------------------
+        */
+
         const caseData =
             pushUpdatePayload.data.case || {};
-
 
         const status =
             caseData.status;
@@ -275,13 +314,11 @@ cxone(
 
         /*
         --------------------------------------------------
-        ATENDIMENTO ENCERRADO
+        CASO ENCERRADO
         --------------------------------------------------
         */
 
-        if (
-            status === 'closed'
-        ) {
+        if (status === 'closed') {
 
             console.log(
                 'Atendimento encerrado.'
@@ -304,7 +341,11 @@ cxone(
 
 
             console.log(
-                'Histórico removido.'
+                '_BECustomerID removido.'
+            );
+
+            console.log(
+                'Próximo atendimento será uma nova conversa.'
             );
 
         }
@@ -378,6 +419,11 @@ function iniciarAtendimento() {
 
             console.log(
                 '4 - autoStartSession enviado.'
+            );
+
+
+            console.log(
+                '================================='
             );
 
         },
