@@ -45,10 +45,6 @@
             cursor: pointer;
         }
 
-        button:hover {
-            background: #005f91;
-        }
-
     </style>
 
 </head>
@@ -122,9 +118,10 @@ cxone(
 CHAT INIT
 ==========================================================
 
-storageType: local
+IMPORTANTE:
 
-Mantém a sessão no armazenamento do WebView.
+storageType = local
+
 
 ==========================================================
 */
@@ -156,7 +153,7 @@ cxone(
 
 /*
 ==========================================================
-NOME DO CLIENTE
+NOME
 ==========================================================
 */
 
@@ -170,7 +167,6 @@ cxone(
 /*
 ==========================================================
 MENSAGEM AUTOMÁTICA
-OBS: ESSA MENSAGEM ESTA SENDO USADA DIRETAMENTE NO NICE
 ==========================================================
 */
 
@@ -196,18 +192,39 @@ cxone(
 
 /*
 ==========================================================
-LIMPAR HISTÓRICO APÓS ENCERRAMENTO
+MONITORAR TODOS OS EVENTOS
 ==========================================================
+*/
 
-Quando o caso for encerrado:
+cxone(
+    'chat',
+    'onAnyPushUpdate',
+    function(evento) {
 
-CaseStatusChanged
-        +
-status = closed
+        console.log(
+            '======================================'
+        );
 
-remove o identificador da conversa armazenado
-no localStorage.
+        console.log(
+            'CXONE EVENT'
+        );
 
+        console.log(
+            evento
+        );
+
+        console.log(
+            '======================================'
+        );
+
+    }
+);
+
+
+/*
+==========================================================
+MONITORAR ENCERRAMENTO DO CASO
+==========================================================
 ==========================================================
 */
 
@@ -217,34 +234,141 @@ cxone(
     ['CaseStatusChanged'],
     function(pushUpdatePayload) {
 
+        console.log(
+            '======================================'
+        );
+
+        console.log(
+            'CASE STATUS CHANGED'
+        );
+
+        console.log(
+            pushUpdatePayload
+        );
+
+        console.log(
+            '======================================'
+        );
+
+
+        /*
+        --------------------------------------------------
+        VALIDAR PAYLOAD
+        --------------------------------------------------
+        */
+
         if (
             typeof pushUpdatePayload === 'undefined'
         ) {
+
+            console.log(
+                'Payload não recebido.'
+            );
+
             return;
+
         }
 
 
         if (
             typeof pushUpdatePayload.data === 'undefined'
         ) {
+
+            console.log(
+                'Payload.data não existe.'
+            );
+
             return;
+
         }
 
+
+        /*
+        --------------------------------------------------
+        PEGAR CASE
+        --------------------------------------------------
+        */
 
         const caseData =
             pushUpdatePayload.data.case || {};
 
 
+        console.log(
+            'CASE:',
+            caseData
+        );
+
+
+        /*
+        --------------------------------------------------
+        PEGAR STATUS
+        --------------------------------------------------
+        */
+
         const status =
             caseData.status;
 
+
+        console.log(
+            'STATUS:',
+            status
+        );
+
+
+        /*
+        --------------------------------------------------
+        CASO ENCERRADO
+        --------------------------------------------------
+        */
 
         if (
             status === 'closed'
         ) {
 
+            console.log(
+                '======================================'
+            );
+
+            console.log(
+                'ATENDIMENTO ENCERRADO'
+            );
+
+            console.log(
+                'LIMPANDO CUSTOMER ID'
+            );
+
+            console.log(
+                '======================================'
+            );
+
+
+            /*
+            ------------------------------------------------
+            REMOVER IDENTIDADE CXONE
+            ------------------------------------------------
+            */
+
             localStorage.removeItem(
                 '_BECustomerID'
+            );
+
+
+            console.log(
+                '_BECustomerID removido.'
+            );
+
+
+            /*
+            ------------------------------------------------
+            CONFERIR
+            ------------------------------------------------
+            */
+
+            console.log(
+                'Valor atual:',
+                localStorage.getItem(
+                    '_BECustomerID'
+                )
             );
 
         }
@@ -261,12 +385,28 @@ INICIAR ATENDIMENTO
 
 function iniciarAtendimento() {
 
+    console.log(
+        '======================================'
+    );
+
+    console.log(
+        'INICIANDO ATENDIMENTO'
+    );
+
+    console.log(
+        '======================================'
+    );
+
 
     /*
     ------------------------------------------------------
     ABRIR CHAT
     ------------------------------------------------------
     */
+
+    console.log(
+        'Abrindo janela...'
+    );
 
     cxone(
         'chat',
@@ -276,12 +416,16 @@ function iniciarAtendimento() {
 
     /*
     ------------------------------------------------------
-    AGUARDAR WIDGET
+    AGUARDAR CHAT
     ------------------------------------------------------
     */
 
     setTimeout(
         function() {
+
+            console.log(
+                'Executando autoStartSession...'
+            );
 
 
             /*
@@ -293,6 +437,11 @@ function iniciarAtendimento() {
             cxone(
                 'chat',
                 'autoStartSession'
+            );
+
+
+            console.log(
+                'Sessão iniciada.'
             );
 
 
