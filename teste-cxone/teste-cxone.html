@@ -116,13 +116,23 @@ cxone(
 ==========================================================
 CHAT INIT
 ==========================================================
+
+storageType: inMemory
+
+O CXone não persiste a sessão no navegador.
+
+==========================================================
 */
 
 cxone(
     'chat',
     'init',
     5731,
-    'chat_8a486555-27cf-4666-adf5-3de6195582dd'
+    'chat_8a486555-27cf-4666-adf5-3de6195582dd',
+    undefined,
+    {
+        storageType: 'inMemory'
+    }
 );
 
 
@@ -156,12 +166,6 @@ cxone(
 ==========================================================
 MENSAGEM AUTOMÁTICA
 ==========================================================
-
-Aqui estamos usando diretamente:
-
-sendFirstMessageAutomatically
-
-==========================================================
 */
 
 cxone(
@@ -173,7 +177,13 @@ cxone(
 
 /*
 ==========================================================
-MOSTRAR MENSAGEM PARA O CLIENTE
+ESCONDER PRIMEIRA MENSAGEM
+==========================================================
+
+true = esconde a mensagem automática do cliente.
+
+Neste teste mantemos true.
+
 ==========================================================
 */
 
@@ -186,7 +196,7 @@ cxone(
 
 /*
 ==========================================================
-MONITORAMENTO DOS EVENTOS CXONE
+MONITORAMENTO DOS EVENTOS
 ==========================================================
 */
 
@@ -199,13 +209,106 @@ cxone(
             '========== CXONE EVENT =========='
         );
 
-        console.log(
-            evento
-        );
+        console.log(evento);
 
         console.log(
             '================================='
         );
+
+    }
+);
+
+
+/*
+==========================================================
+LIMPAR HISTÓRICO APÓS ENCERRAMENTO
+==========================================================
+
+Quando o caso for encerrado pelo CXone,
+removemos o customerID armazenado.
+
+Na próxima sessão o CXone não deverá
+recuperar a conversa anterior.
+
+==========================================================
+*/
+
+cxone(
+    'chat',
+    'onPushUpdate',
+    [
+        'CaseStatusChanged'
+    ],
+    function(pushUpdatePayload) {
+
+        console.log(
+            '========== CASE STATUS =========='
+        );
+
+        console.log(
+            pushUpdatePayload
+        );
+
+
+        if (
+            typeof pushUpdatePayload === 'undefined' ||
+            typeof pushUpdatePayload.data === 'undefined'
+        ) {
+
+            return;
+
+        }
+
+
+        const caseData =
+            pushUpdatePayload.data.case || {};
+
+
+        const status =
+            caseData.status;
+
+
+        console.log(
+            'Status do atendimento:',
+            status
+        );
+
+
+        /*
+        --------------------------------------------------
+        ATENDIMENTO ENCERRADO
+        --------------------------------------------------
+        */
+
+        if (
+            status === 'closed'
+        ) {
+
+            console.log(
+                'Atendimento encerrado.'
+            );
+
+            console.log(
+                'Limpando histórico do CXone...'
+            );
+
+
+            /*
+            ------------------------------------------------
+            REMOVE CUSTOMER ID
+            ------------------------------------------------
+            */
+
+            localStorage.removeItem(
+                '_BECustomerID'
+            );
+
+
+            console.log(
+                'Histórico removido.'
+            );
+
+        }
 
     }
 );
@@ -252,7 +355,6 @@ function iniciarAtendimento() {
     ------------------------------------------------------
     AGUARDAR WIDGET
     ------------------------------------------------------
-    ------------------------------------------------------
     */
 
     setTimeout(
@@ -265,7 +367,7 @@ function iniciarAtendimento() {
 
             /*
             --------------------------------------------------
-            AUTO START
+            INICIAR NOVA SESSÃO
             --------------------------------------------------
             */
 
