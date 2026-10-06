@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+  <title>Atendimento Alares</title>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+<script>
+  /*
+   * =====================================================
+   * NICE CXone loader
+   * =====================================================
+   */
+  (function(n, u) {
+    window.CXoneDfo = n;
+
+    window[n] = window[n] || function() {
+      (window[n].q = window[n].q || []).push(arguments);
+    };
+
+    window[n].u = u;
+
+    var e = document.createElement('script');
+    e.type = 'module';
+    e.src = u + '?' + Math.round(Date.now() / 1e3 / 3600);
+    document.head.appendChild(e);
+  })(
+    'cxone',
+    'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js'
+  );
+
+  /*
+   * =====================================================
+   * Alares / CXone
+   * Valores fornecidos pelo Anderson / NICE CXone.
+   * =====================================================
+   */
+  cxone('init', '5731');
+
+  cxone(
+    'chat',
+    'init',
+    5731,
+    'chat_8a486555-27cf-4666-adf5-3de6195582dd'
+  );
+
+  cxone('chat', 'setLocale', 'pt-BR');
+
+  /*
+   * Mantemos as traduções usadas no exemplo fornecido pela CXone.
+   */
+  cxone(
+    'chat',
+    'setTranslations',
+    {
+      replyBoxPlaceholder: 'Digite sua mensagem...',
+      sendMessageButton: 'Enviar mensagem',
+      retry: 'Tentar novamente',
+      cancel: 'Cancelar',
+      done: 'Concluído',
+      startNewChat: 'Iniciar novo atendimento',
+      waitingForAgent: 'Aguardando atendente...',
+      waitingInQueue: 'Aguardando atendimento...',
+      statusReconnecting: 'Tentando reconectar...',
+      unexpectedError: 'Ocorreu um erro inesperado.',
+      validationMandatory: 'Este campo é obrigatório.',
+      pleaseSelect: 'Selecione...',
+      poweredBy: 'Desenvolvido por'
+    }
+  );
+  cxone('chat', 'hidePreSurvey');
+
+  /*
+   * =====================================================
+   * MENSAGEM AUTOMÁTICA
+   * =====================================================
+   */
+  cxone(
+    'chat',
+    'sendFirstMessageAutomatically',
+    'TESTE CXONE - mensagem automática para o cliente'
+  );
+
+  /*
+   * MOSTRAR MENSAGEM PARA O CLIENTE
+   */
+  cxone(
+    'chat',
+    'hideFirstSentMessage',
+    true
+  );
+
+  /*
+   * =====================================================
+   * MONITORAMENTO DOS EVENTOS CXONE
+   * =====================================================
+   */
+  cxone('chat', 'onAnyPushUpdate', function (evento) {
+    console.log('========== CXONE EVENT ==========');
+    console.log(evento);
+    console.log('=================================');
+  });
+
+  /*
+   * Aparência equivalente ao exemplo do Anderson.
+   */
+  cxone(
+    'chat',
+    'setCustomCss',
+    `
+      [data-selector="CONTENT"] {
+        background: #ffffff !important;
+      }
+
+      [data-selector="HEADER"] {
+        background: #0077b5 !important;
+        color: #ffffff !important;
+      }
+
+      [data-selector="CUSTOMER_MESSAGE_BUBBLE"] {
+        background: #0077b5 !important;
+        color: #ffffff !important;
+        border-radius: 12px !important;
+      }
+
+      [data-selector="AGENT_MESSAGE_BUBBLE"] {
+        background: #f1f1f1 !important;
+        color: #222222 !important;
+        border-radius: 12px !important;
+      }
+
+      [data-selector="REPLY_BOX"] {
+        border-radius: 12px !important;
+      }
+
+      [data-selector="TEXTAREA"] {
+        border-radius: 10px !important;
+      }
+
+      [data-selector="SEND_BUTTON"] {
+        border-radius: 50% !important;
+      }
+    `
+  );
+
+  /*
+   * IMPORTANTE:
+   * Esta página NÃO envia dados do cliente e NÃO abre o chat sozinha.
+   *
+   * O app B2C, após carregar esta página no WebView, injeta:
+   *   origem
+   *   documento
+   *   tipodocumento
+   *   idcontrato
+   *
+   * e somente depois chama:
+   *   cxone('chat', 'openChatWindow')
+   *
+   * Isso evita expor CPF/CNPJ/contrato em URL ou query string.
+   */
+  window.ALARES_CXONE_HOST_READY = true;
+</script>
+</body>
+</html>
